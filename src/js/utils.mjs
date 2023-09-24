@@ -5,10 +5,6 @@ export function qs(selector, parent = document) {
 // or a more concise version if you are into that sort of thing:
 // export const qs = (selector, parent = document) => parent.querySelector(selector);
 
-// Retrieve all keys from localstorage
-export function getLocalStorageKeys() {
-  return Object.keys(localStorage);
-}
 // retrieve data from localstorage
 export function getLocalStorage(key) {
   return JSON.parse(localStorage.getItem(key));
