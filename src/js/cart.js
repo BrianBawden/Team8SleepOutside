@@ -53,6 +53,14 @@ function totalCalc(arrayKeys){
 
 }
 
+function showTotal() {
+  const totalClass = document.querySelector(".total");
+  if(totalClass.classList.contains("hide")){
+    totalClass.classList.remove("hide");
+    totalClass.classList.add("show");
+  }
+}
+
 renderCartContents();
 
 /*
@@ -64,4 +72,5 @@ if (localStorage.length !== 0) {
   let finalTotal = document.querySelector(".cartTotal");
 
   finalTotal.textContent = getCartTotal;
+  showTotal();
 }
