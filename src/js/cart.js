@@ -50,9 +50,9 @@ function totalCalc(arrayKeys){
     
   });
   return total;
-
 }
 
+// showTotal checks if the html class total has a hide class. If it does the hide class is removed and replaced with show to affect it's visibility on the cart index.html webpage.
 function showTotal() {
   const totalClass = document.querySelector(".total");
   if(totalClass.classList.contains("hide")){
