@@ -61,16 +61,18 @@ function showTotal() {
   }
 }
 
-renderCartContents();
 
 /*
  This if statement checks to see if there are any keys in the local storage. If there are it will add the final price of all the objects together and switch the hide class to show.
  */
 if (localStorage.length !== 0) {
+
   let arrayKeys = getStorageKeys();
   let getCartTotal = totalCalc(arrayKeys);
   let finalTotal = document.querySelector(".cartTotal");
 
-  finalTotal.textContent = getCartTotal;
+  finalTotal.textContent = `$${getCartTotal}`;
+  
+  renderCartContents();
   showTotal();
 }
