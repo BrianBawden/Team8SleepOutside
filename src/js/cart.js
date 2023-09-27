@@ -26,4 +26,53 @@ function cartItemTemplate(item) {
   return newItem;
 }
 
-renderCartContents();
+
+// getStorageKeys returns an array of the keys in the localStorage.
+function getStorageKeys(){
+  let arrayStorageKeys = [];
+
+  for (let i = 0; i < localStorage.length; i++){
+    const localKey = localStorage.key(i);
+    arrayStorageKeys.push(localKey);
+    // console.log(arrayStorageKeys)
+    return arrayStorageKeys;
+  }
+}
+
+// totalCalc returns the total final price of items in the cart based on keys in local storage.
+function totalCalc(arrayKeys){
+  let total = 0;
+  arrayKeys.forEach(element => {
+    let currentArray = getLocalStorage(element);
+    console.log(getLocalStorage(element));
+    console.log(currentArray.FinalPrice);
+    total += currentArray.FinalPrice;
+    
+  });
+  return total;
+
+}
+
+function showTotal() {
+  const totalClass = document.querySelector(".total");
+  if(totalClass.classList.contains("hide")){
+    totalClass.classList.remove("hide");
+    totalClass.classList.add("show");
+  }
+}
+
+
+/*
+ This if statement checks to see if there are any keys in the local storage. If there are it will add the final price of all the objects together and switch the hide class to show.
+ */
+if (localStorage.length !== 0) {
+
+  let arrayKeys = getStorageKeys();
+  let getCartTotal = totalCalc(arrayKeys);
+  let finalTotal = document.querySelector(".cartTotal");
+
+  finalTotal.textContent = `$${getCartTotal}`;
+  
+  renderCartContents();
+  showTotal();
+}
