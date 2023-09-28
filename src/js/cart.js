@@ -1,10 +1,11 @@
-import { getLocalStorage } from "./utils.mjs";
+import { getLocalStorage, getLocalStorageKeys } from "./utils.mjs";
 
 function renderCartContents() {
-  const cartItems = getLocalStorage("so-cart");
-  // const htmlItems = cartItems.map((item) => cartItemTemplate(item));
-  document.querySelector(".product-list").innerHTML =
-    cartItemTemplate(cartItems);
+  const cartItemskeys = getLocalStorageKeys();
+  const cartItems = cartItemskeys.map((key) => getLocalStorage(key));
+
+  const htmlItems = cartItems.map((item) => cartItemTemplate(item));
+  document.querySelector(".product-list").innerHTML = htmlItems.join("");
 }
 
 function cartItemTemplate(item) {
@@ -35,8 +36,8 @@ function getStorageKeys(){
     const localKey = localStorage.key(i);
     arrayStorageKeys.push(localKey);
     // console.log(arrayStorageKeys)
-    return arrayStorageKeys;
   }
+  return arrayStorageKeys;
 }
 
 // totalCalc returns the total final price of items in the cart based on keys in local storage.
