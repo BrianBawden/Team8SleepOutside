@@ -110,6 +110,26 @@ button {
   fill: gray;
 }
 
+/* W3, trello card by Beth Yanez. Directions: 
+Add a superscript number of items in the cart to the backpack icon. 
+Used this tutorial for help: https://dev.to/vinodsys/css-shopping-cart-icon-with-number-of-items-52a0 
+& https://codepen.io/ehooks/pen/VgwVJR */
+.cartCount[cart-count]:after {
+  content:attr(cart-count);
+  font-size:60%;
+  color: var(--dark-grey);
+  background: var(--primary-color);
+  border-radius:70%;
+  line-height:1.3em;
+  padding: 0 5px;
+  position:absolute;
+  right:0px;
+  top:15px;
+  text-align: center;
+  font-weight: bold;
+}
+
+
 /* End cart icon styles */
 
 .mission {
@@ -200,6 +220,18 @@ button {
 .cart-card__price {
   grid-row: 2;
   grid-column: 3;
+}
+
+/* Style to control cart total */
+
+.hide{
+  display: none;
+}
+
+.show{
+  display: block;
+  text-align: right;
+  padding: 1rem;
 }
 
 @media screen and (min-width: 500px) {

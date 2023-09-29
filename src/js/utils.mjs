@@ -9,6 +9,7 @@ export function qs(selector, parent = document) {
 export function getLocalStorageKeys() {
   return Object.keys(localStorage);
 }
+
 // retrieve data from localstorage
 export function getLocalStorage(key) {
   return JSON.parse(localStorage.getItem(key));
