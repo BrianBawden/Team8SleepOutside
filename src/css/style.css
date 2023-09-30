@@ -13,23 +13,28 @@
   --small-font: 0.8em;
   --large-font: 1.2em;
 }
+
 * {
   box-sizing: border-box;
 }
+
 body {
   margin: 0;
   font-family: var(--font-body);
   font-size: var(--font-base);
   color: var(--dark-grey);
 }
+
 img {
   max-width: 100%;
 }
+
 header {
   display: flex;
   justify-content: space-between;
   padding: 0 10px;
 }
+
 .logo {
   line-height: 60px;
   width: 245px;
@@ -39,23 +44,28 @@ header {
   text-align: right;
   font-family: var(--font-headline);
 }
+
 .logo img {
   width: 60px;
   height: 60px;
 }
+
 .logo a {
   text-decoration: none;
   color: var(--font-body);
 }
+
 .hero {
   position: relative;
 }
+
 .hero .logo {
   position: absolute;
   left: calc(50% - 60px);
   bottom: -10px;
   background-color: white;
 }
+
 .logo--square {
   font-size: var(--small-font);
   width: 110px;
@@ -68,14 +78,17 @@ header {
   align-items: center;
   line-height: 1;
 }
+
 .logo--square img {
   width: 90px;
   height: 90px;
   margin-top: -1.3em;
 }
+
 .logo--square > div {
   margin-top: -1.7em;
 }
+
 /* utility classes */
 .highlight {
   color: var(--tertiary-color);
@@ -91,21 +104,24 @@ button {
   font-size: var(--large-font);
   cursor: pointer;
 }
+
 .divider {
   border-bottom: 2px solid var(--primary-color);
 }
+
 /* End utility classes */
 
 /* Cart icon styles */
 .cart {
-  padding-top: 1em;
   position: relative;
+  padding-top: 1em;
   text-align: center;
 }
 
 .cart svg {
   width: 25px;
 }
+
 .cart:hover svg {
   fill: gray;
 }
@@ -113,22 +129,22 @@ button {
 /* W3, trello card by Beth Yanez. Directions: 
 Add a superscript number of items in the cart to the backpack icon. 
 Used this tutorial for help: https://dev.to/vinodsys/css-shopping-cart-icon-with-number-of-items-52a0 
-& https://codepen.io/ehooks/pen/VgwVJR */
-.cartCount[cart-count]:after {
-  content:attr(cart-count);
-  font-size:60%;
+& https://codepen.io/ehooks/pen/VgwVJR 
+.cartCount[cart-count] {*/
+.cartItemCount[cartItemCount] {
+  content: attr(cartItemCount);
+  font-size: 60%;
   color: var(--dark-grey);
   background: var(--primary-color);
-  border-radius:70%;
-  line-height:1.3em;
+  border-radius: 70%;
+  line-height: 1.3em;
   padding: 0 5px;
-  position:absolute;
-  right:0px;
-  top:15px;
+  position: absolute;
+  right: 0px;
+  top: 15px;
   text-align: center;
   font-weight: bold;
 }
-
 
 /* End cart icon styles */
 
@@ -139,9 +155,11 @@ Used this tutorial for help: https://dev.to/vinodsys/css-shopping-cart-icon-with
   max-width: 600px;
   margin: auto;
 }
+
 .products {
   padding: 0.5em;
 }
+
 .product-list {
   display: flex;
   flex-flow: row wrap;
@@ -149,10 +167,12 @@ Used this tutorial for help: https://dev.to/vinodsys/css-shopping-cart-icon-with
   list-style-type: none;
   padding: 0;
 }
+
 .product-list a {
   text-decoration: none;
   color: var(--dark-grey);
 }
+
 /* Styles for product lists */
 .product-card {
   flex: 1 1 45%;
@@ -161,6 +181,7 @@ Used this tutorial for help: https://dev.to/vinodsys/css-shopping-cart-icon-with
   border: 1px solid var(--light-grey);
   max-width: 250px;
 }
+
 .product-card h2,
 .product-card h3,
 .product-card p {
@@ -174,6 +195,7 @@ Used this tutorial for help: https://dev.to/vinodsys/css-shopping-cart-icon-with
 .card__name {
   font-size: 1em;
 }
+
 /* End product list card */
 
 .product-detail {
@@ -199,9 +221,11 @@ Used this tutorial for help: https://dev.to/vinodsys/css-shopping-cart-icon-with
   grid-row: 1/3;
   grid-column: 1;
 }
+
 .cart-card p {
   margin-top: 0;
 }
+
 .cart-card .card__name {
   grid-row: 1;
   grid-column: 2;
@@ -224,11 +248,11 @@ Used this tutorial for help: https://dev.to/vinodsys/css-shopping-cart-icon-with
 
 /* Style to control cart total */
 
-.hide{
+.hide {
   display: none;
 }
 
-.show{
+.show {
   display: block;
   text-align: right;
   padding: 1rem;
@@ -239,9 +263,11 @@ Used this tutorial for help: https://dev.to/vinodsys/css-shopping-cart-icon-with
     max-width: 1080px;
     margin: auto;
   }
+
   .mission {
     font-size: 1.2em;
   }
+
   .cart-card {
     font-size: inherit;
     grid-template-columns: 150px auto 15%;
