@@ -278,3 +278,11 @@ footer {
   font-size: var(--small-font);
   padding: 1em;
 }
+
+s {
+  text-decoration: line-through;
+}
+
+.discount {
+  color: red;
+}
