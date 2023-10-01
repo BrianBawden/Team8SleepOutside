@@ -45,16 +45,19 @@ function renderProductDetails(product) {
 }
 // add to cart
 function addToCart(id, product) {
+  console.log('Adding to cart:', id, product); 
   setLocalStorage(id, product);
 }
 // add to cart button event handler
 async function addToCartHandler(e) {
   // const productID = e.target.dataset.id;
   const productId = getParam("product");
+  console.log('Product ID:', productId);
   const product = await findProductById(productId);
-
+  console.log('Product:', product);
   addToCart(productId, product);
 }
+
 // add listener to Add to Cart button
 document
   .getElementById("addToCart")
