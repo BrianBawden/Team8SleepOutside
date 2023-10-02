@@ -54,6 +54,7 @@ function renderProductDetails(product) {
 
 // add to cart
 function addToCart(id, product) {
+  console.log('Adding to cart:', id, product); 
   setLocalStorage(id, product);
 }
 
@@ -75,11 +76,13 @@ export function updateCartItemCount() {
 async function addToCartHandler(e) {
   // const productID = e.target.dataset.id;
   const productId = getParam("product");
+  console.log('Product ID:', productId);
   const product = await findProductById(productId);
-
+  console.log('Product:', product);
   addToCart(productId, product);
   updateCartItemCount();
 }
+
 // Call function so it runs on page load
 updateCartItemCount()
 

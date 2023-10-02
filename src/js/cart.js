@@ -11,9 +11,9 @@ if (cartItemCountElement != null) {
 function renderCartContents() {
   const cartItemskeys = getLocalStorageKeys();
   const cartItems = cartItemskeys.map((key) => getLocalStorage(key));
-
   const htmlItems = cartItems.map((item) => cartItemTemplate(item));
   document.querySelector(".product-list").innerHTML = htmlItems.join("");
+  attachRemoveListeners();
 }
 
 function cartItemTemplate(item) {
@@ -30,7 +30,8 @@ function cartItemTemplate(item) {
   <p class="cart-card__color">${item.Colors[0].ColorName}</p>
   <p class="cart-card__quantity">qty: 1</p>
   <p class="cart-card__price">$${item.FinalPrice}</p>
-</li>`;
+  <span class="remove-item" data-id="${item.Id}">X Remove</span>
+  </li>`;
 
   return newItem;
 }
@@ -40,9 +41,11 @@ function totalCalc(arrayKeys) {
   let total = 0;
   arrayKeys.forEach((element) => {
     let currentArray = getLocalStorage(element);
-    // console.log(getLocalStorage(element));
-    // console.log(currentArray.FinalPrice);
-    total += currentArray.FinalPrice;
+    if (currentArray && currentArray.FinalPrice) {  // check if currentArray and FinalPrice are not null
+      total += currentArray.FinalPrice;
+    } else {
+      console.error(`Invalid item found in localStorage with key: ${element}`);
+    }
   });
   return total;
 }
@@ -63,9 +66,30 @@ if (localStorage.length !== 0) {
   let arrayKeys = getLocalStorageKeys();
   let getCartTotal = totalCalc(arrayKeys);
   let finalTotal = document.querySelector(".cartTotal");
-
   finalTotal.textContent = `$${getCartTotal}`;
 
   renderCartContents();
   showTotal();
+}
+
+// removeItem removes the item from the cart and updates the total price.
+function attachRemoveListeners() {
+  const removeButtons = document.querySelectorAll('.remove-item');
+  removeButtons.forEach(button => {
+    button.addEventListener('click', handleRemoveItem);
+  });
+}
+// updateTotal updates the total price of the cart.
+function updateTotal() {
+  let arrayKeys = getLocalStorageKeys();
+  let getCartTotal = totalCalc(arrayKeys);
+  let finalTotal = document.querySelector(".cartTotal");
+  finalTotal.textContent = `$${getCartTotal}`;
+}
+// handleRemoveItem removes the item from the cart and updates the total price.
+function handleRemoveItem(event) {
+  const itemId = event.target.dataset.id;
+  localStorage.removeItem(itemId);
+  renderCartContents();
+  updateTotal();
 }

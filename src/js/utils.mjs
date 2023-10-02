@@ -7,12 +7,27 @@ export function qs(selector, parent = document) {
 
 // Retrieve all keys from localstorage
 export function getLocalStorageKeys() {
-  return Object.keys(localStorage);
+  return Object.keys(localStorage).filter(key => {
+    const item = localStorage.getItem(key);
+    try {
+      JSON.parse(item);
+      return true;  // Keep this key
+    } catch (e) {
+      console.error(`Error parsing item with key ${key} from localStorage: ${e}`);
+      return false;  // Discard this key
+    }
+  });
 }
 
 // retrieve data from localstorage
 export function getLocalStorage(key) {
-  return JSON.parse(localStorage.getItem(key));
+  const item = localStorage.getItem(key);
+  try {
+    return JSON.parse(item);
+  } catch (error) {
+    console.error(`Error parsing item with key ${key} from localStorage:`, error);
+    return null;  // or some other default value or action
+  }
 }
 // save data to local storage
 export function setLocalStorage(key, data) {
