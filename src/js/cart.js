@@ -41,10 +41,11 @@ function totalCalc(arrayKeys) {
   let total = 0;
   arrayKeys.forEach((element) => {
     let currentArray = getLocalStorage(element);
-    if (currentArray && currentArray.FinalPrice) {  // check if currentArray and FinalPrice are not null
+    if (currentArray && currentArray.FinalPrice) {
+      // check if currentArray and FinalPrice are not null
       total += currentArray.FinalPrice;
     } else {
-      console.error(`Invalid item found in localStorage with key: ${element}`);
+      //console.error(`Invalid item found in localStorage with key: ${element}`);
     }
   });
   return total;
@@ -74,9 +75,9 @@ if (localStorage.length !== 0) {
 
 // removeItem removes the item from the cart and updates the total price.
 function attachRemoveListeners() {
-  const removeButtons = document.querySelectorAll('.remove-item');
-  removeButtons.forEach(button => {
-    button.addEventListener('click', handleRemoveItem);
+  const removeButtons = document.querySelectorAll(".remove-item");
+  removeButtons.forEach((button) => {
+    button.addEventListener("click", handleRemoveItem);
   });
 }
 // updateTotal updates the total price of the cart.

@@ -33,8 +33,8 @@ function renderProductDetails(product) {
   let formattedSuggestedRetailPrice = `$${parseFloat(product.SuggestedRetailPrice).toFixed(2)}`;
   let formattedFinalPrice = `$${parseFloat(product.FinalPrice).toFixed(2)}`;
 
-  let priceHTML = '';
-  let discountHTML = '';
+  let priceHTML = "";
+  let discountHTML = "";
 
   if (parseFloat(product.SuggestedRetailPrice) > parseFloat(product.FinalPrice)) {
     let discountPercent = (((parseFloat(product.SuggestedRetailPrice) - parseFloat(product.FinalPrice)) / parseFloat(product.SuggestedRetailPrice)) * 100).toFixed(0);
@@ -54,7 +54,7 @@ function renderProductDetails(product) {
 
 // add to cart
 function addToCart(id, product) {
-  console.log('Adding to cart:', id, product); 
+  console.log("Adding to cart:", id, product); 
   setLocalStorage(id, product);
 }
 
@@ -76,9 +76,9 @@ export function updateCartItemCount() {
 async function addToCartHandler(e) {
   // const productID = e.target.dataset.id;
   const productId = getParam("product");
-  console.log('Product ID:', productId);
+  console.log("Product ID: ", productId);
   const product = await findProductById(productId);
-  console.log('Product:', product);
+  console.log("Product:", product);
   addToCart(productId, product);
   updateCartItemCount();
 }
