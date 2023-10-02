@@ -1,12 +1,20 @@
 import { getLocalStorage, getLocalStorageKeys } from "./utils.mjs";
 
-// update the cart counter in the header
-const cartTotalItems = Object.keys(localStorage);
-const cartItemCount = cartTotalItems.length;
-const cartItemCountElement = document.getElementById("cartItemCount");
-if (cartItemCountElement != null) {
-  cartItemCountElement.textContent = cartItemCount;
+// update cart item count in header
+export function updateCartItemCount() {
+  const cartItems = Object.keys(localStorage);
+  const cartItemCount = cartItems.length;
+  const cartItemCountElement = document.getElementById("cartItemCount");
+  if (cartItemCountElement != null) {
+    cartItemCountElement.textContent = cartItemCount;
+    //console.log("cart element exists");
+  }
+  //console.log(cartItemCount);
+  //console.log(cartItemCountElement)
 }
+
+// Call function so it runs on page load and updates cart count
+updateCartItemCount();
 
 function renderCartContents() {
   const cartItemskeys = getLocalStorageKeys();
@@ -45,7 +53,7 @@ function totalCalc(arrayKeys) {
       // check if currentArray and FinalPrice are not null
       total += currentArray.FinalPrice;
     } else {
-      //console.error(`Invalid item found in localStorage with key: ${element}`);
+      console.error(`Invalid item found in localStorage with key: ${element}`);
     }
   });
   return total;
@@ -93,4 +101,5 @@ function handleRemoveItem(event) {
   localStorage.removeItem(itemId);
   renderCartContents();
   updateTotal();
+  updateCartItemCount();
 }
