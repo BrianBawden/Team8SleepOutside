@@ -13,7 +13,8 @@ export function updateCartItemCount() {
   //console.log(cartItemCountElement)
 }
 
-// Call function so it runs on page load
+
+// Call function so it runs on page load and updates cart count
 updateCartItemCount();
 
 function renderCartContents() {

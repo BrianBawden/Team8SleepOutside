@@ -54,7 +54,8 @@ function renderProductDetails(product) {
 
 // add to cart
 function addToCart(id, product) {
-  console.log("Adding to cart: ", id, product);
+
+  console.log("Adding to cart:", id, product); 
   setLocalStorage(id, product);
 }
 
