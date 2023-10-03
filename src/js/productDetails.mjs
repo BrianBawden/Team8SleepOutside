@@ -54,6 +54,7 @@ function renderProductDetails(product) {
 
 // add to cart
 function addToCart(id, product) {
+
   console.log("Adding to cart:", id, product); 
   setLocalStorage(id, product);
 }
@@ -81,10 +82,23 @@ async function addToCartHandler(e) {
   console.log("Product:", product);
   addToCart(productId, product);
   updateCartItemCount();
+  cartIconAnimation();
 }
 
 // Call function so it runs on page load
 updateCartItemCount()
+
+// Animation for cart icon,
+const cartIcon = document.querySelector(".cart");
+// Add the animation class and remove it after a 2 second/2000 millisecond delay
+function cartIconAnimation() {
+  cartIcon.classList.add("iconAnimation");
+  setTimeout(() => {
+    cartIcon.classList.remove("iconAnimation");
+  }, 2000);
+}
+
+
 
 // add listener to Add to Cart button
 document
