@@ -1,12 +1,20 @@
 import { getLocalStorage, getLocalStorageKeys } from "./utils.mjs";
 
-// update the cart counter in the header
-const cartTotalItems = Object.keys(localStorage);
-const cartItemCount = cartTotalItems.length;
-const cartItemCountElement = document.getElementById("cartItemCount");
-if (cartItemCountElement != null) {
-  cartItemCountElement.textContent = cartItemCount;
+// update cart item count in header
+export function updateCartItemCount() {
+  const cartItems = Object.keys(localStorage);
+  const cartItemCount = cartItems.length;
+  const cartItemCountElement = document.getElementById("cartItemCount");
+  if (cartItemCountElement != null) {
+    cartItemCountElement.textContent = cartItemCount;
+    //console.log("cart element exists");
+  }
+  //console.log(cartItemCount);
+  //console.log(cartItemCountElement)
 }
+
+// Call function so it runs on page load
+updateCartItemCount();
 
 function renderCartContents() {
   const cartItemskeys = getLocalStorageKeys();
@@ -41,7 +49,8 @@ function totalCalc(arrayKeys) {
   let total = 0;
   arrayKeys.forEach((element) => {
     let currentArray = getLocalStorage(element);
-    if (currentArray && currentArray.FinalPrice) {  // check if currentArray and FinalPrice are not null
+    if (currentArray && currentArray.FinalPrice) {
+      // check if currentArray and FinalPrice are not null
       total += currentArray.FinalPrice;
     } else {
       console.error(`Invalid item found in localStorage with key: ${element}`);
@@ -74,9 +83,9 @@ if (localStorage.length !== 0) {
 
 // removeItem removes the item from the cart and updates the total price.
 function attachRemoveListeners() {
-  const removeButtons = document.querySelectorAll('.remove-item');
-  removeButtons.forEach(button => {
-    button.addEventListener('click', handleRemoveItem);
+  const removeButtons = document.querySelectorAll(".remove-item");
+  removeButtons.forEach((button) => {
+    button.addEventListener("click", handleRemoveItem);
   });
 }
 // updateTotal updates the total price of the cart.
@@ -92,4 +101,5 @@ function handleRemoveItem(event) {
   localStorage.removeItem(itemId);
   renderCartContents();
   updateTotal();
+  updateCartItemCount();
 }
