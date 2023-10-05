@@ -11,10 +11,10 @@ export function getLocalStorageKeys() {
     const item = localStorage.getItem(key);
     try {
       JSON.parse(item);
-      return true;  // Keep this key
+      return true; // Keep this key
     } catch (e) {
       console.error(`Error parsing item with key ${key} from localStorage: ${e}`);
-      return false;  // Discard this key
+      return false; // Discard this key
     }
   });
 }
@@ -26,7 +26,7 @@ export function getLocalStorage(key) {
     return JSON.parse(item);
   } catch (error) {
     console.error(`Error parsing item with key ${key} from localStorage:`, error);
-    return null;  // or some other default value or action
+    return null; // or some other default value or action
   }
 }
 // save data to local storage
