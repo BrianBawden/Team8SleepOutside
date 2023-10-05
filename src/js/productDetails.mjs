@@ -55,7 +55,7 @@ function renderProductDetails(product) {
 // add to cart
 function addToCart(id, product) {
 
-  console.log("Adding to cart:", id, product); 
+  console.log("Adding to cart:", id, product);
   setLocalStorage(id, product);
 }
 
@@ -64,14 +64,21 @@ export function updateCartItemCount() {
   const cartItems = Object.keys(localStorage);
   const cartItemCount = cartItems.length;
   const cartItemCountElement = document.getElementById("cartItemCount");
-  if (cartItemCountElement != null) {
-    cartItemCountElement.textContent = cartItemCount;
-    //console.log("cart element exists");
+
+  if (cartItemCountElement !== null) {
+    if (cartItemCount === 0) {
+      // If there aren't items in the cart, hide the cartItemCount element
+      cartItemCountElement.style.display = "none";
+    } else {
+      // If there are items in the cart, show the cartItemCount element
+      cartItemCountElement.style.display = "block";
+      cartItemCountElement.textContent = cartItemCount;
+    }
   }
-  //console.log(cartItemCount);
-  //console.log(cartItemCountElement)
 }
 
+// Call function so it runs on page load and updates cart count
+updateCartItemCount();
 
 // add to cart button event handler
 async function addToCartHandler(e) {
@@ -84,9 +91,6 @@ async function addToCartHandler(e) {
   updateCartItemCount();
   cartIconAnimation();
 }
-
-// Call function so it runs on page load
-updateCartItemCount()
 
 // Animation for cart icon,
 const cartIcon = document.querySelector(".cart");
