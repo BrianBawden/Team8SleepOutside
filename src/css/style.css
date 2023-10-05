@@ -129,8 +129,7 @@ button {
 /* W3, trello card by Beth Yanez. Directions: 
 Add a superscript number of items in the cart to the backpack icon. 
 Used this tutorial for help: https://dev.to/vinodsys/css-shopping-cart-icon-with-number-of-items-52a0 
-& https://codepen.io/ehooks/pen/VgwVJR 
-.cartCount[cart-count] {*/
+& https://codepen.io/ehooks/pen/VgwVJR */
 .cartItemCount[cartItemCount] {
   content: attr(cartItemCount);
   font-size: 60%;
