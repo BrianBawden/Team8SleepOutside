@@ -110,3 +110,15 @@ function handleRemoveItem(event) {
   updateTotal();
   updateCartItemCount();
 }
+
+// Brian Bawden: addQty returns the current quantity of an item increased by one and is called by the .cart-card__quantity_add button.
+function addQty(oldQty){
+  let qty = oldQty + 1;
+  return qty
+}
+
+// Brian Bawden: subQty returns the current quantity of an item decreased by one and is called by the .cart-card__quantity_sub button.
+function subQty(oldQty){
+  let qty = oldQty - 1;
+  return qty
+}
