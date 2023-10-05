@@ -246,7 +246,7 @@ Best site ever to assist with animation: https://www.doozytools.com/dev-tools/cs
 /* Start cart list card styles */
 .cart-card {
   display: grid;
-  /* grid-template-columns: 25% auto 15%; */
+  grid-template-columns: 25% auto 15%;
   font-size: var(--small-font);
   /* max-height: 120px; */
   align-items: center;
@@ -305,6 +305,7 @@ Best site ever to assist with animation: https://www.doozytools.com/dev-tools/cs
   background: var(--secondary-color);
   padding: .2em 1em;
   margin: .5em;
+  font-size: small;
 }
 
 /* Style to control cart total */
@@ -331,7 +332,7 @@ Best site ever to assist with animation: https://www.doozytools.com/dev-tools/cs
 
   .cart-card {
     font-size: inherit;
-    /* grid-template-columns: 150px auto 15%; */
+    grid-template-columns: 150px auto 15%;
   }
 }
 
