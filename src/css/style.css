@@ -247,7 +247,7 @@ Best site ever to assist with animation: https://www.doozytools.com/dev-tools/cs
 /* Start cart list card styles */
 .cart-card {
   display: grid;
-  grid-template-columns: 25% auto 15%;
+  /* grid-template-columns: 25% auto 15%; */
   font-size: var(--small-font);
   /* max-height: 120px; */
   align-items: center;
@@ -282,6 +282,32 @@ Best site ever to assist with animation: https://www.doozytools.com/dev-tools/cs
   grid-column: 3;
 }
 
+.cart-card button{
+  margin: unset;
+  color: white;
+  background: var(--secondary-color);
+  grid-row: 1;
+  grid-column: 3;
+  align-self: end;
+  font-size: unset;
+  padding: unset;
+  width: 25%;
+}
+
+#cart_sub{
+  margin-left: 2em;
+}
+
+.remove-item{
+  cursor: pointer;
+  font-weight: bold;
+  grid-column: 3;
+  color: white;
+  background: var(--secondary-color);
+  padding: .2em 1em;
+  margin: .5em;
+}
+
 /* Style to control cart total */
 
 .hide {
@@ -306,7 +332,7 @@ Best site ever to assist with animation: https://www.doozytools.com/dev-tools/cs
 
   .cart-card {
     font-size: inherit;
-    grid-template-columns: 150px auto 15%;
+    /* grid-template-columns: 150px auto 15%; */
   }
 }
 
@@ -323,9 +349,3 @@ s {
   color: var(--primary-color);
 }
 
-.remove-item {
-  cursor: pointer;
-  color: var(--secondary-color);
-  text-decoration: underline;
-  font-weight: bold;
-}
