@@ -20,13 +20,17 @@ function productCardTemplate(product) {
   </li>`
 }
 
+
+
 export default async function productList(selector, category) {
   // get the element we will insert the list into from the selector
   // get the list of products 
   // render out the product list to the element
   const products = await getData(category);
+  const ids = ["880RR", "985RF", "985PR", "344YJ"];
+  const filteredProducts = products.filter((product) =>  ids.includes(product.Id));
 
   const parent = document.querySelector(selector);
   //renderList(products, parent);
-  renderListWithTemplate(productCardTemplate, parent, products);
+  renderListWithTemplate(productCardTemplate, parent, filteredProducts);
 };
