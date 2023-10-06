@@ -2,6 +2,10 @@ import {
   getData
 } from "./productData.mjs";
 
+import {
+  renderListWithTemplate
+} from "./utils.mjs";
+
 // productList.mjs
 function productCardTemplate(product) {
   return `<li class="product-card">
@@ -21,13 +25,8 @@ export default async function productList(selector, category) {
   // get the list of products 
   // render out the product list to the element
   const products = await getData(category);
-  
+
   const parent = document.querySelector(selector);
-    renderList(products, parent);
+  //renderList(products, parent);
+  renderListWithTemplate(productCardTemplate, parent, products);
 };
-
-function renderList(list, el) {
-    const htmlStrings =  list.map(productCardTemplate);
-    el.insertAdjacentHTML("afterbegin", htmlStrings.join(""));
-
-}
