@@ -1,3 +1,7 @@
+import productList from "./productList.mjs";
+
+productList(".product-list", "tents");
+
 // update cart item count in header
 export function updateCartItemCount() {
   const cartItems = Object.keys(localStorage);

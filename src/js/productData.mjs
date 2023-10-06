@@ -7,6 +7,13 @@ function convertToJson(res) {
 }
 
 export function getData(category = "tents") {
+  //Joshua's way of ensuring we have a returned promise 
+//   const response = fetch(`../json/${category}.json`).then(convertToJson).then((data) => {
+// console.log("data", data)
+//   return data
+// }
+//   );
+//   return response;
   return fetch(`../json/${category}.json`)
     .then(convertToJson)
     .then((data) => data);
