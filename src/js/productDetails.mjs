@@ -84,9 +84,9 @@ updateCartItemCount();
 async function addToCartHandler(e) {
   // const productID = e.target.dataset.id;
   const productId = getParam("product");
-  console.log("Product ID: ", productId);
+  // console.log("Product ID: ", productId);
   const product = await findProductById(productId);
-  console.log("Product:", product);
+  // console.log("Product:", product);
   addToCart(productId, product);
   updateCartItemCount();
   cartIconAnimation();
