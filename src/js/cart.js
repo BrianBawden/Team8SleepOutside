@@ -31,6 +31,8 @@ function renderCartContents() {
 }
 
 function cartItemTemplate(item) {
+  // let qty = document.querySelector(".qty");
+  // let qtyValue = qty.value;
   const newItem = `<li class="cart-card divider">
   <a href="#" class="cart-card__image">
     <img
@@ -42,7 +44,7 @@ function cartItemTemplate(item) {
     <h2 class="card__name">${item.Name}</h2>
   </a>
   <p class="cart-card__color">${item.Colors[0].ColorName}</p>
-  <p class="cart-card__quantity">qty: ${addQty()}</p>
+  <p class="cart-card__quantity">qty: <span class="qty">1</span></p>
   <button class="cart-card__quantity_add" id = "cart_add">+</button>
   <button class="cart-card__quantity_sub" id="cart_sub">-</button>
   <p class="cart-card__price">$${item.FinalPrice}</p>
@@ -113,7 +115,7 @@ function handleRemoveItem(event) {
 }
 
 function addQtyBtnListeners(){
-  console.log("add test");
+
   const addBtn = document.querySelectorAll(".cart-card__quantity_add");
   addBtn.forEach((button) => {
     button.addEventListener("click", addQty);
@@ -121,15 +123,13 @@ function addQtyBtnListeners(){
 }
 
 // Brian Bawden: addQty returns the current quantity of an item increased by one and is called by the .cart-card__quantity_add button.
-function addQty(){
-  let qty;
+function addQty(product){
 
-  if (qty == null){
-    qty = 1;
-  }else{
-    qty += 1;
-  }
-  return qty
+  let qty = document.querySelector(".qty");
+  let qtyValue = parseInt(qty.textContent);
+  qtyValue += 1;
+
+  return qty.textContent = qtyValue;
 }
 
 // Brian Bawden: subQty returns the current quantity of an item decreased by one and is called by the .cart-card__quantity_sub button.
