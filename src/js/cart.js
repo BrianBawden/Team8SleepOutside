@@ -45,9 +45,9 @@ function cartItemTemplate(item) {
     <h2 class="card__name">${item.Name}</h2>
   </a>
   <p class="cart-card__color">${item.Colors[0].ColorName}</p>
-  <p class="cart-card__quantity" id="${item.Id}"> 1 </p>
+  <p class="cart-card__quantity" >qty: <span id="${item.Id}">1</span> </p>
   <button class="cart-card__quantity_add" value="${item.Id}">+</button>
-  <button class="cart-card__quantity_sub" id="cart_sub" onclick="subQty(${item.Id})">-</button>
+  <button class="cart-card__quantity_sub" id="cart_sub" value="${item.Id}">-</button>
   <p class="cart-card__price">$${item.FinalPrice}</p>
   <span class="remove-item" data-id="${item.Id}">Remove</span>
   </li>`;
@@ -119,7 +119,6 @@ function addQtyBtnListeners(){
 
   const addBtn = document.querySelectorAll(".cart-card__quantity_add");
   const subBtn = document.querySelectorAll(".cart-card__quantity_sub");
-  const qtId = document.querySelectorAll(".cart-card__quantity");
 
   addBtn.forEach((button) => {
     button.addEventListener("click", addQty, false);
@@ -129,6 +128,8 @@ function addQtyBtnListeners(){
 
   subBtn.forEach((button) => {
     button.addEventListener("click", subQty);
+    button.myProduct = button.value;
+
   })
 }
 
@@ -144,8 +145,10 @@ function addQty(product){
 
 // Brian Bawden: subQty returns the current quantity of an item decreased by one and is called by the .cart-card__quantity_sub button.
 function subQty(product){
+  let productId = product.currentTarget.myProduct;
+  let qty = document.getElementById(productId);
+  let qtyValue = parseInt(qty.textContent);
+  qtyValue -= 1;
 
-  console.log("-");
-  // let qty = oldQty - 1;
-  // return qty
+  return qty.textContent = qtyValue;
 }
