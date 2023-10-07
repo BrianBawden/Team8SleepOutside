@@ -1,7 +1,12 @@
-import { doc } from "prettier";
-import { getLocalStorage, getLocalStorageKeys } from "./utils.mjs";
+import {
+  doc
+} from "prettier";
+import {
+  getLocalStorage,
+  getLocalStorageKeys
+} from "./utils.mjs";
 
-// update cart item count in header
+// Update cart item badge count in header
 export function updateCartItemCount() {
   const cartItems = Object.keys(localStorage);
   const cartItemCount = cartItems.length;
@@ -17,6 +22,7 @@ export function updateCartItemCount() {
       cartItemCountElement.textContent = cartItemCount;
     }
   }
+  console.log("cartItemCount:", cartItemCount);
 }
 
 // Call function so it runs on page load and updates cart count
@@ -78,10 +84,7 @@ function showTotal() {
     totalClass.classList.add("show");
   }
 }
-
-/*
- This if statement checks to see if there are any keys in the local storage. If there are it will add the final price of all the objects together and switch the hide class to show.
- */
+//This if statement checks to see if there are any keys in the local storage. If there are it will add the final price of all the objects together and switch the hide class to show.
 if (localStorage.length !== 0) {
   let arrayKeys = getLocalStorageKeys();
   let getCartTotal = totalCalc(arrayKeys);
@@ -99,14 +102,29 @@ function attachRemoveListeners() {
     button.addEventListener("click", handleRemoveItem);
   });
 }
-// updateTotal updates the total price of the cart.
+// updateTotal updates the total price of the cart based on item quantities.
 function updateTotal() {
-  let arrayKeys = getLocalStorageKeys();
-  let getCartTotal = totalCalc(arrayKeys);
-  let finalTotal = document.querySelector(".cartTotal");
-  finalTotal.textContent = `$${getCartTotal}`;
+  const arrayKeys = getLocalStorageKeys();
+  //let getCartTotal = totalCalc(arrayKeys);
+  let total = 0;
+
+  arrayKeys.forEach((key) => {
+    const qty = parseInt(document.getElementById(key).textContent);
+    const item = getLocalStorage(key);
+    // Calculate the total price for each item and add it to the overall total
+    if (item && item.FinalPrice) {
+      const itemPrice = item.FinalPrice;
+      total += qty * itemPrice;
+    } else {
+      //console.error(`Invalid item found in localStorage with key: ${key}`);
+    }
+  });
+  // Update the cartTotal element with the calculated total
+  const finalTotal = document.querySelector(".cartTotal");
+  finalTotal.textContent = `$${total.toFixed(2)}`;
 }
-// handleRemoveItem removes the item from the cart and updates the total price.
+
+// handleRemoveItem completely deletes that item (no matter the quantity) from the cart and updates the total price.
 function handleRemoveItem(event) {
   const itemId = event.target.dataset.id;
   localStorage.removeItem(itemId);
@@ -115,7 +133,8 @@ function handleRemoveItem(event) {
   updateCartItemCount();
 }
 
-function addQtyBtnListeners(){
+//listens when the quantity + and - buttons are clicked and calls the addQty and subQty functions
+function addQtyBtnListeners() {
 
   const addBtn = document.querySelectorAll(".cart-card__quantity_add");
   const subBtn = document.querySelectorAll(".cart-card__quantity_sub");
@@ -123,32 +142,40 @@ function addQtyBtnListeners(){
   addBtn.forEach((button) => {
     button.addEventListener("click", addQty, false);
     button.myProduct = button.value;
-
   })
 
   subBtn.forEach((button) => {
     button.addEventListener("click", subQty);
     button.myProduct = button.value;
-
   })
 }
 
 // Brian Bawden: addQty returns the current quantity of an item increased by one and is called by the .cart-card__quantity_add button.
-function addQty(product){
+function addQty(product) {
   let productId = product.currentTarget.myProduct;
-  let qty = document.getElementById(productId);
-  let qtyValue = parseInt(qty.textContent);
-  qtyValue += 1;
+  let qtyElement = document.getElementById(productId);
+  let qtyValue = parseInt(qtyElement.textContent);
 
-  return qty.textContent = qtyValue;
+  qtyValue += 1;
+  qtyElement.textContent = qtyValue;
+  //console.log("Quantity:", qtyValue);
+  //update the total displayed on page as well as the cart item count badge over the icon
+  updateTotal();
+  updateCartItemCount();
 }
 
 // Brian Bawden: subQty returns the current quantity of an item decreased by one and is called by the .cart-card__quantity_sub button.
-function subQty(product){
+function subQty(product) {
   let productId = product.currentTarget.myProduct;
-  let qty = document.getElementById(productId);
-  let qtyValue = parseInt(qty.textContent);
-  qtyValue -= 1;
-
-  return qty.textContent = qtyValue;
+  let qtyElement = document.getElementById(productId);
+  let qtyValue = parseInt(qtyElement.textContent);
+  //don't allow the counter to be negative
+  if (qtyValue > 0) {
+    qtyValue -= 1;
+    qtyElement.textContent = qtyValue;
+    //console.log("Quantity:", qtyValue);
+  }
+  //update the total displayed on page as well as the cart item count badge over the icon
+  updateTotal();
+  updateCartItemCount();
 }
