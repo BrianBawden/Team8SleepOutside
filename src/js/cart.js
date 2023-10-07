@@ -1,3 +1,4 @@
+import { doc } from "prettier";
 import { getLocalStorage, getLocalStorageKeys } from "./utils.mjs";
 
 // update cart item count in header
@@ -40,13 +41,13 @@ function cartItemTemplate(item) {
       alt="${item.Name}"
     />
   </a>
-  <a href="#">
+  <a href="#"
     <h2 class="card__name">${item.Name}</h2>
   </a>
   <p class="cart-card__color">${item.Colors[0].ColorName}</p>
-  <p class="cart-card__quantity">qty: <span class="qty">1</span></p>
-  <button class="cart-card__quantity_add" id = "cart_add">+</button>
-  <button class="cart-card__quantity_sub" id="cart_sub">-</button>
+  <p class="cart-card__quantity" id="${item.Id}"> 1 </p>
+  <button class="cart-card__quantity_add" value="${item.Id}">+</button>
+  <button class="cart-card__quantity_sub" id="cart_sub" onclick="subQty(${item.Id})">-</button>
   <p class="cart-card__price">$${item.FinalPrice}</p>
   <span class="remove-item" data-id="${item.Id}">Remove</span>
   </li>`;
@@ -117,15 +118,24 @@ function handleRemoveItem(event) {
 function addQtyBtnListeners(){
 
   const addBtn = document.querySelectorAll(".cart-card__quantity_add");
+  const subBtn = document.querySelectorAll(".cart-card__quantity_sub");
+  const qtId = document.querySelectorAll(".cart-card__quantity");
+
   addBtn.forEach((button) => {
-    button.addEventListener("click", addQty);
+    button.addEventListener("click", addQty, false);
+    button.myProduct = button.value;
+
+  })
+
+  subBtn.forEach((button) => {
+    button.addEventListener("click", subQty);
   })
 }
 
 // Brian Bawden: addQty returns the current quantity of an item increased by one and is called by the .cart-card__quantity_add button.
 function addQty(product){
-
-  let qty = document.querySelector(".qty");
+  let productId = product.currentTarget.myProduct;
+  let qty = document.getElementById(productId);
   let qtyValue = parseInt(qty.textContent);
   qtyValue += 1;
 
@@ -133,7 +143,9 @@ function addQty(product){
 }
 
 // Brian Bawden: subQty returns the current quantity of an item decreased by one and is called by the .cart-card__quantity_sub button.
-function subQty(oldQty){
-  let qty = oldQty - 1;
-  return qty
+function subQty(product){
+
+  console.log("-");
+  // let qty = oldQty - 1;
+  // return qty
 }
