@@ -35,6 +35,7 @@ function renderCartContents() {
   document.querySelector(".product-list").innerHTML = htmlItems.join("");
   attachRemoveListeners();
   addQtyBtnListeners();
+  showTotal()
 }
 
 function cartItemTemplate(item) {
