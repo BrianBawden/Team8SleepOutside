@@ -84,6 +84,14 @@ function showTotal() {
     totalClass.classList.add("show");
   }
 }
+// hideTotal checks if the html class total has a show class. If it does the show class is removed and replaced with hide to affect it's visibility on the cart index.html webpage.
+function hideTotal(){
+  const totalClass = document.querySelector(".total");
+  if (totalClass.classList.contains("show")) {
+    totalClass.classList.remove("show");
+    totalClass.classList.add("hide");
+  }
+}
 //This if statement checks to see if there are any keys in the local storage. If there are it will add the final price of all the objects together and switch the hide class to show.
 if (localStorage.length !== 0) {
   let arrayKeys = getLocalStorageKeys();
@@ -131,6 +139,7 @@ function handleRemoveItem(event) {
   renderCartContents();
   updateTotal();
   updateCartItemCount();
+  hideTotal();
 }
 
 //listens when the quantity + and - buttons are clicked and calls the addQty and subQty functions
