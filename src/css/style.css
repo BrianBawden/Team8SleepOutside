@@ -281,6 +281,33 @@ Best site ever to assist with animation: https://www.doozytools.com/dev-tools/cs
   grid-column: 3;
 }
 
+.cart-card button{
+  margin: unset;
+  color: white;
+  background: var(--secondary-color);
+  grid-row: 1;
+  grid-column: 3;
+  align-self: end;
+  font-size: unset;
+  padding: unset;
+  width: 25%;
+}
+
+#cart_sub{
+  margin-left: 2em;
+}
+
+.remove-item{
+  cursor: pointer;
+  font-weight: bold;
+  grid-column: 3;
+  color: white;
+  background: var(--secondary-color);
+  padding: .2em 1em;
+  margin: .5em;
+  font-size: small;
+}
+
 /* Style to control cart total */
 
 .hide {
@@ -322,9 +349,3 @@ s {
   color: var(--primary-color);
 }
 
-.remove-item {
-  cursor: pointer;
-  color: var(--secondary-color);
-  text-decoration: underline;
-  font-weight: bold;
-}
