@@ -2,6 +2,7 @@ import {
   getLocalStorage,
   renderListWithTemplate,
   getLocalStorageKeys,
+  setLocalStorage,
 } from "./utils.mjs";
 
 export default function ShoppingCart() {
@@ -49,7 +50,7 @@ function cartItemTemplate(item) {
       <h2 class="card__name">${item.Name}</h2>
     </a>
     <p class="cart-card__color">${item.Colors[0].ColorName}</p>
-    <p class="cart-card__quantity" >qty: <span id="${item.Id}">1</span> </p>
+    <p class="cart-card__quantity" >qty: <span id="${item.Id}">${item.qty}</span> </p>
     <button class="cart-card__quantity_add" value="${item.Id}">+</button>
     <button class="cart-card__quantity_sub" id="cart_sub" value="${item.Id}">-</button>
     <p class="cart-card__price">$${item.FinalPrice}</p>
@@ -125,8 +126,8 @@ function updateTotal() {
   let total = 0;
 
   arrayKeys.forEach((key) => {
-    const qty = parseInt(document.getElementById(key).textContent);
     const item = getLocalStorage(key);
+    const qty = item.qty;
     // Calculate the total price for each item and add it to the overall total
     if (item && item.FinalPrice) {
       const itemPrice = item.FinalPrice;
@@ -170,11 +171,11 @@ function addQtyBtnListeners() {
 function addQty(product) {
   let productId = product.currentTarget.myProduct;
   let qtyElement = document.getElementById(productId);
-  let qtyValue = parseInt(qtyElement.textContent);
-
-  qtyValue += 1;
-  qtyElement.textContent = qtyValue;
-  //console.log("Quantity:", qtyValue);
+  let productValue = JSON.parse(localStorage.getItem(productId));
+  
+  productValue.qty += 1;
+  setLocalStorage(productId, productValue);
+  qtyElement.textContent = productValue.qty;
   //update the total displayed on page as well as the cart item count badge over the icon
   updateTotal();
   updateCartItemCount();
@@ -184,12 +185,12 @@ function addQty(product) {
 function subQty(product) {
   let productId = product.currentTarget.myProduct;
   let qtyElement = document.getElementById(productId);
-  let qtyValue = parseInt(qtyElement.textContent);
+  let productValue = JSON.parse(localStorage.getItem(productId));
   //don't allow the counter to be negative
-  if (qtyValue > 0) {
-    qtyValue -= 1;
-    qtyElement.textContent = qtyValue;
-    //console.log("Quantity:", qtyValue);
+  if (productValue.qty > 0) {
+    productValue.qty -= 1;
+    setLocalStorage(productId, productValue);
+    qtyElement.textContent = productValue.qty;
   }
   //update the total displayed on page as well as the cart item count badge over the icon
   updateTotal();
