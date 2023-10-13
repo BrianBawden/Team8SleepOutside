@@ -347,5 +347,14 @@ s {
 
 .discount {
   color: var(--primary-color);
+
 }
 
+.discounted {
+  color: red;
+}
+
+.percent-off {
+  font-size: 0.8em;
+  color: green;
+}
