@@ -1,10 +1,11 @@
 import {
-  doc
-} from "prettier";
-import {
   getLocalStorage,
-  getLocalStorageKeys
+  getLocalStorageKeys,
+  loadHeaderFooter
 } from "./utils.mjs";
+
+// load header and footer
+loadHeaderFooter();
 
 // Update cart item badge count in header
 export function updateCartItemCount() {

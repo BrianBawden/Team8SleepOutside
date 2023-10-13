@@ -1,4 +1,8 @@
 import productList from "./productList.mjs";
+import { renderWithTemplate, loadHeaderFooter, qs } from "./utils.mjs";
+
+// load header and footer
+loadHeaderFooter();
 
 productList(".product-list", "tents");
 
@@ -19,6 +23,7 @@ export function updateCartItemCount() {
     }
   }
 }
+
 
 // Call function so it runs on page load and updates cart count
 updateCartItemCount();
