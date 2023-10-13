@@ -8,6 +8,13 @@ import {
 
 // productList.mjs
 function productCardTemplate(product) {
+  const finalPrice = product.FinalPrice;
+  const suggestedRetailPrice = product.SuggestedRetailPrice;
+  const isDiscounted = finalPrice < suggestedRetailPrice;
+  const percentOff = isDiscounted 
+    ? Math.round((1 - finalPrice / suggestedRetailPrice) * 100) 
+    : 0;
+
   return `<li class="product-card">
     <a href="product_pages/index.html?product=${product.Id}">
     <img
@@ -16,8 +23,17 @@ function productCardTemplate(product) {
     />
     <h3 class="card__brand">${product.Brand.Name}</h3>
     <h2 class="card__name">${product.Name}</h2>
-    <p class="product-card__price">$${product.FinalPrice}</p></a>
-  </li>`
+    ${
+      isDiscounted
+        ? `<p class="product-card__price discounted" id="productSuggestedRetailPrice">
+            <s>$${suggestedRetailPrice.toFixed(2)}</s> 
+            <span class="percent-off" id="discount">${percentOff}% off</span>
+          </p>
+          <p class="product-card__price" id="productFinalPrice">$${finalPrice.toFixed(2)}</p>`
+        : `<p class="product-card__price" id="productFinalPrice">$${finalPrice.toFixed(2)}</p>`
+    }
+    </a>
+  </li>`;
 }
 
 
