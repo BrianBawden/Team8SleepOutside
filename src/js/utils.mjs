@@ -7,13 +7,15 @@ export function qs(selector, parent = document) {
 
 // Retrieve all keys from localstorage
 export function getLocalStorageKeys() {
-  return Object.keys(localStorage).filter(key => {
+  return Object.keys(localStorage).filter((key) => {
     const item = localStorage.getItem(key);
     try {
       JSON.parse(item);
       return true; // Keep this key
     } catch (e) {
-      console.error(`Error parsing item with key ${key} from localStorage: ${e}`);
+      console.error(
+        `Error parsing item with key ${key} from localStorage: ${e}`
+      );
       return false; // Discard this key
     }
   });
@@ -25,7 +27,10 @@ export function getLocalStorage(key) {
   try {
     return JSON.parse(item);
   } catch (error) {
-    console.error(`Error parsing item with key ${key} from localStorage:`, error);
+    console.error(
+      `Error parsing item with key ${key} from localStorage:`,
+      error
+    );
     return null; // or some other default value or action
   }
 }
@@ -48,41 +53,54 @@ export function getParam(param) {
   return urlParams.get(param);
 }
 
-export function renderListWithTemplate(templateFn, parentElement, list, position = "afterbegin", clear = true) {
+export function renderListWithTemplate(
+  templateFn,
+  parentElement,
+  list,
+  position = "afterbegin",
+  clear = true
+) {
   if (clear) {
     parentElement.innerHTML = "";
-  };
+  }
   const htmlStrings = list.map(templateFn);
-  
+
   parentElement.insertAdjacentHTML(position, htmlStrings.join(""));
 }
 
-export async function renderWithTemplate(templateFn, parentElement, data, callback, position = "afterbegin", clear = true) {
+export async function renderWithTemplate(
+  templateFn,
+  parentElement,
+  data,
+  callback,
+  position = "afterbegin",
+  clear = true
+) {
   if (clear) {
     parentElement.innerHTML = "";
   }
   const htmlString = await templateFn(data);
   parentElement.insertAdjacentHTML(position, htmlString);
-  if(callback) {
+  if (callback) {
     callback(data);
   }
 }
 
 export function loadTemplate(path) {
-  return async function() {
+  return async function () {
     const response = await fetch(path);
     if (response.ok) {
-    const html = await response.text();
-    return html;
+      const html = await response.text();
+      return html;
     }
   };
 }
 
 export async function loadHeaderFooter() {
-    const headerTemplateFn = loadTemplate("/partials/header.html");
-    const footerTemplateFn = loadTemplate("/partials/footer.html");
-    const headerElement = qs("#main-header");
-    const footerElement = qs("#main-footer");
-    renderWithTemplate( headerTemplateFn, headerElement );
-    renderWithTemplate( footerTemplateFn, footerElement );
-};
+  const headerTemplateFn = loadTemplate("/partials/header.html");
+  const footerTemplateFn = loadTemplate("/partials/footer.html");
+  const headerElement = qs("#main-header");
+  const footerElement = qs("#main-footer");
+  renderWithTemplate(headerTemplateFn, headerElement);
+  renderWithTemplate(footerTemplateFn, footerElement);
+}
