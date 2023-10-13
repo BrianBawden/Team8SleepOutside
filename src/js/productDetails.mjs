@@ -55,8 +55,13 @@ function renderProductDetails(product) {
 // add to cart
 function addToCart(id, product) {
 
-  console.log("Adding to cart:", id, product);
   setLocalStorage(id, product);
+  const localProduct = JSON.parse(localStorage.getItem(id));
+  // add qty to localStorage.id 
+  localProduct.qty = 1;
+
+  setLocalStorage(id, localProduct);
+
 }
 
 // update cart item count in header
