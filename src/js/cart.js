@@ -10,4 +10,8 @@ import {
 loadHeaderFooter();
 shoppingCart();
 // Call function so it runs on page load and updates cart count
-updateCartItemCount();
+document.addEventListener("DOMContentLoaded", () => {
+    // Your code here
+    updateCartItemCount();
+  });
+// updateCartItemCount();

@@ -126,5 +126,4 @@ export function updateCartItemCount() {
       cartItemCountElement.textContent = cartTotal;
     }
   }
-  console.log("utls:", cartTotal);
 }
