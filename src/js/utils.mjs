@@ -104,3 +104,27 @@ export async function loadHeaderFooter() {
   renderWithTemplate(headerTemplateFn, headerElement);
   renderWithTemplate(footerTemplateFn, footerElement);
 }
+
+
+// Update cart item badge count in header
+export function updateCartItemCount() {
+  let cartTotal = 0;
+  const cartItems = Object.keys(localStorage);
+  const cartItemCount = cartItems.forEach(function(item) {
+    let product = getLocalStorage(item);
+    cartTotal += product.qty;
+  })
+  const cartItemCountElement = document.getElementById("cartItemCount");
+
+  if (cartItemCountElement !== null) {
+    if (cartTotal === 0) {
+      // If there aren't items in the cart, hide the cartItemCount element
+      cartItemCountElement.style.display = "none";
+    } else {
+      // If there are items in the cart, show the cartItemCount element
+      cartItemCountElement.style.display = "block";
+      cartItemCountElement.textContent = cartTotal;
+    }
+  }
+  console.log("utls:", cartTotal);
+}

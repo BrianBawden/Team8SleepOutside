@@ -1,7 +1,10 @@
-import { updateCartItemCount } from "./shoppingCart.mjs";
+// import { updateCartItemCount } from "./shoppingCart.mjs";
 import shoppingCart from "./shoppingCart.mjs";
 
-import { loadHeaderFooter } from "./utils.mjs";
+import { 
+    loadHeaderFooter,
+    updateCartItemCount,
+ }  from "./utils.mjs";
 
 // load header and footer
 loadHeaderFooter();
