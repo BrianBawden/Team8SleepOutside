@@ -71,26 +71,27 @@ updateCartItemCount();
 
 // add to cart button event handler
 async function addToCartHandler(e) {
-  // const productID = e.target.dataset.id;
   const productId = getParam("product");
-  // console.log("Product ID: ", productId);
   const product = await findProductById(productId);
-  // console.log("Product:", product);
   addToCart(productId, product);
   updateCartItemCount();
-  cartIconAnimation();
+
+  // Animation for cart icon,
+  const cartIcon = document.querySelector(".cart");
+  if (cartIcon) {
+    cartIconAnimation(cartIcon);
+  }
 }
 
 // Animation for cart icon,
-const cartIcon = document.querySelector(".cart");
+//const cartIcon = document.querySelector(".cart");
 // Add the animation class and remove it after a 2 second/2000 millisecond delay
-function cartIconAnimation() {
+function cartIconAnimation(cartIcon) {
   cartIcon.classList.add("iconAnimation");
   setTimeout(() => {
     cartIcon.classList.remove("iconAnimation");
   }, 2000);
 }
-
 
 
 // add listener to Add to Cart button
