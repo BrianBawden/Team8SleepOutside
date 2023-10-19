@@ -112,7 +112,9 @@ export function updateCartItemCount() {
   const cartItems = Object.keys(localStorage);
   const cartItemCount = cartItems.forEach(function(item) {
     let product = getLocalStorage(item);
-    cartTotal += product.qty;
+    if (product.hasOwnProperty("qty")) {
+      cartTotal += product.qty;
+    } 
   })
   const cartItemCountElement = document.getElementById("cartItemCount");
 
