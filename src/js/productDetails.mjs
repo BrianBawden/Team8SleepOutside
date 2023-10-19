@@ -67,7 +67,7 @@ function addToCart(id, product) {
 
 
 // Call function so it runs on page load and updates cart count
-updateCartItemCount();
+// updateCartItemCount();
 
 // add to cart button event handler
 async function addToCartHandler(e) {
