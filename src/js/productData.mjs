@@ -21,5 +21,20 @@ export function getData(category = "tents") {
 
 export async function findProductById(id) {
   const products = await getData();
-  return products.find((item) => item.Id === id);
+  for (let item of products) {
+    if (item.Id === id) {
+      return item;
+    }
+  };
+  window.location.href = '../product_pages/error.html';
+
 }
+  // }); products.find((item) => {
+  // if (item.Id === id){
+  //   return item;
+  // } else {
+  //   console.log("productData line 28");
+  //   // window.location.href = 'https://www.google.com/';
+  // }  
+  // });
+// }
