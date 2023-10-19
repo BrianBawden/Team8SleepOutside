@@ -3,6 +3,7 @@ import {
   renderListWithTemplate,
   getLocalStorageKeys,
   setLocalStorage,
+  updateCartItemCount,
 } from "./utils.mjs";
 
 export default function ShoppingCart() {
@@ -18,24 +19,7 @@ export default function ShoppingCart() {
   // document.querySelector(".product-list").innerHTML = htmlItems.join("");
 }
 
-// Update cart item badge count in header
-export function updateCartItemCount() {
-  const cartItems = Object.keys(localStorage);
-  const cartItemCount = cartItems.length;
-  const cartItemCountElement = document.getElementById("cartItemCount");
 
-  if (cartItemCountElement !== null) {
-    if (cartItemCount === 0) {
-      // If there aren't items in the cart, hide the cartItemCount element
-      cartItemCountElement.style.display = "none";
-    } else {
-      // If there are items in the cart, show the cartItemCount element
-      cartItemCountElement.style.display = "block";
-      cartItemCountElement.textContent = cartItemCount;
-    }
-  }
-  console.log("cartItemCount:", cartItemCount);
-}
 function cartItemTemplate(item) {
   // let qty = document.querySelector(".qty");
   // let qtyValue = qty.value;
