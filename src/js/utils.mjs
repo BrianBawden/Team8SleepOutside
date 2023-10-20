@@ -129,3 +129,35 @@ export function updateCartItemCount() {
     }
   }
 }
+
+// Load alerts on the home page
+export async function fetchAlerts() {
+  try {
+    const response = await fetch('/json/alerts.json');
+    if (!response.ok) {
+      throw new Error('Network response was not ok ' + response.statusText);
+    }
+    const data = await response.json();
+    createAlerts(data);
+  } catch (error) {
+    console.error('There has been a problem with your fetch operation: ', error);
+  }
+}
+
+function createAlerts(alerts) {
+  if (alerts && alerts.length > 0) {
+    const alertList = document.createElement('section');
+    alertList.className = 'alert-list';
+
+    alerts.forEach(alert => {
+      const p = document.createElement('p');
+      p.textContent = alert.message;
+      p.style.backgroundColor = alert.background;
+      p.style.color = alert.color;
+      alertList.appendChild(p);
+    });
+
+    const mainElement = document.querySelector('main');
+    mainElement.prepend(alertList);
+  }
+}
