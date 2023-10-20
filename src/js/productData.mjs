@@ -1,3 +1,6 @@
+
+const baseURL = import.meta.env.VITE_SERVER_URL;
+
 function convertToJson(res) {
   if (res.ok) {
     return res.json();
@@ -6,27 +9,30 @@ function convertToJson(res) {
   }
 }
 
-export function getData(category = "tents") {
-  //Joshua's way of ensuring we have a returned promise 
-//   const response = fetch(`../json/${category}.json`).then(convertToJson).then((data) => {
-// console.log("data", data)
-//   return data
-// }
-//   );
-//   return response;
-  return fetch(`../json/${category}.json`)
-    .then(convertToJson)
-    .then((data) => data);
+export async function getData(category) {
+  const response = await fetch(baseURL + `products/search/${category}`);
+  const data = await convertToJson(response);
+  return data.Result;
 }
 
+// export function getData(category = "tents") {
+//   //Joshua's way of ensuring we have a returned promise 
+// //   const response = fetch(`../json/${category}.json`).then(convertToJson).then((data) => {
+// // console.log("data", data)
+// //   return data
+// // }
+// //   );
+// //   return response;
+//   return fetch(`../json/${category}.json`)
+//     .then(convertToJson)
+//     .then((data) => data);
+// }
+
 export async function findProductById(id) {
-  const products = await getData();
-  for (let item of products) {
-    if (item.Id === id) {
-      return item;
-    }
-  };
-  window.location.href = '../product_pages/error.html';
+  const response = await fetch(baseURL + `product/${id}`);
+  const product = await convertToJson(response);
+  console.log("find", product);
+  return product.Result;
 
 }
   // }); products.find((item) => {

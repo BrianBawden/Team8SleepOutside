@@ -28,7 +28,7 @@ function renderProductDetails(product) {
 
   name.textContent = product.Name;
   productNameWithoutBrand.textContent = product.NameWithoutBrand;
-  productImage.src = product.Image;
+  productImage.src = product.Images.PrimaryLarge;
 
   // Format prices to standard dollar format
   let formattedSuggestedRetailPrice = `$${parseFloat(product.SuggestedRetailPrice).toFixed(2)}`;
