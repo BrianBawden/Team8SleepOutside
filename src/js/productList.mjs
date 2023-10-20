@@ -16,9 +16,9 @@ function productCardTemplate(product) {
     : 0;
 
   return `<li class="product-card">
-    <a href="product_pages/index.html?product=${product.Id}">
+    <a href="/product_pages/index.html?product=${product.Id}">
     <img
-      src="${product.Image}"
+      src="${product.Images.PrimaryMedium}"
       alt="Image of ${product.Name}"
     />
     <h3 class="card__brand">${product.Brand.Name}</h3>
@@ -44,9 +44,9 @@ export default async function productList(selector, category) {
   // render out the product list to the element
   const products = await getData(category);
   const ids = ["880RR", "985RF", "985PR", "344YJ"];
-  const filteredProducts = products.filter((product) =>  ids.includes(product.Id));
+  // const filteredProducts = products.filter((product) =>  ids.includes(product.Id));
 
   const parent = document.querySelector(selector);
   //renderList(products, parent);
-  renderListWithTemplate(productCardTemplate, parent, filteredProducts);
+  renderListWithTemplate(productCardTemplate, parent, products);
 };

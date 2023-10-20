@@ -243,6 +243,24 @@ Best site ever to assist with animation: https://www.doozytools.com/dev-tools/cs
   width: 100%;
 }
 
+/* product category images */
+
+.product-categories {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  list-style-type: none;
+  padding: 0;
+}
+
+.product-categories img {
+  width: 100%;
+}
+
+.product-categories li {
+  flex-basis: 25%;
+}
+
 /* Start cart list card styles */
 .cart-card {
   display: grid;
