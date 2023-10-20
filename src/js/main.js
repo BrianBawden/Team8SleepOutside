@@ -13,4 +13,4 @@ productList(".product-list", "tents");
 
 
 // Call function so it runs on page load and updates cart count
-updateCartItemCount();
+// updateCartItemCount();
