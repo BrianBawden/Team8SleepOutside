@@ -320,6 +320,50 @@ Best site ever to assist with animation: https://www.doozytools.com/dev-tools/cs
   padding: 1rem;
 }
 
+/*
+Style for Call To Action Banner on homepage. BY-W6, Trello Card
+  I still need to adjust it for mobile devices - 10/18/23, by
+*/
+.actionBanner {
+  background-image: url('../images/ACTIONBANNERpaul-volkmer-qVotvbsuM_c-unsplash.jpg');
+  background-size: repeat;
+  color: var(--primary-color);
+  text-align: center;
+  padding: 10px;
+  box-shadow: 0 -10px 30px var(--tertiary-color);
+  text-align: center;
+}
+
+.action-h2 {
+  font-size: var(--large-font);
+  font-weight: bold;
+}
+
+.action-p {
+  font-size: var(--font-body);
+}
+
+#action-button {
+  background-color: var(--secondary-color);
+  color: var(--light-grey);
+  padding: 5px 10px;
+  margin: auto;
+  font-size: var(--font-headline);
+  width: fit-content;
+  text-align: center;
+  border: 2px solid var(--tertiary-color);
+  border-radius: 8px;
+}
+
+#action-button:hover {
+  background-color: var(--dark-grey);
+  color: var(--tertiary-color);
+  cursor: pointer;
+  box-shadow: 0 -7px 10px var(--tertiary-color);
+}
+/* End Call To Action styles */
+
+
 @media screen and (min-width: 500px) {
   body {
     max-width: 1080px;
