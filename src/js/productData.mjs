@@ -29,11 +29,21 @@ export async function getData(category) {
 //     .then((data) => data);
 // }
 
+// BB: The findProductById function uses the API to get the product data based on the 
+// id passed to the function and converts the API response to JSON. It then checks if 
+// product and its results are not null and the result.id matches id. If not the url is
+// redirected to the error page.
 export async function findProductById(id) {
+  
   const response = await fetch(baseURL + `product/${id}`);
   const product = await convertToJson(response);
-  console.log("find", product);
-  return product.Result;
+
+  if (product != null && product.Result != null && product.Result.Id === id){
+    return product.Result;
+  } else{
+    window.location.href = '../product_pages/error.html';
+  }
+
 
 }
   // }); products.find((item) => {
