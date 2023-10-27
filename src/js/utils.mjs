@@ -54,7 +54,7 @@ export function getParam(param) {
   return urlParams.get(param);
 }
 
-function individualCartItem(list) {
+export function individualCartItem(list) {
   let listId = []; // listId holds the Id value for each item in the cart without duplicating any Id values.
   let newList = []
   list.forEach(element => {
