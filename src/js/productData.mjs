@@ -41,7 +41,7 @@ export async function findProductById(id) {
   if (product != null && product.Result != null && product.Result.Id === id){
     return product.Result;
   } else{
-    window.location.href = '../product_pages/error.html';
+    window.location.href = "../product_pages/error.html";
   }
 
 
