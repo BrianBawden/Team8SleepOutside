@@ -1,4 +1,3 @@
-// import { updateCartItemCount } from "./shoppingCart.mjs";
 import shoppingCart from "./shoppingCart.mjs";
 
 import { 

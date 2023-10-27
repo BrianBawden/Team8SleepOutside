@@ -1,5 +1,5 @@
 import {
-  getData
+  getProductsByCategory
 } from "./externalServices.mjs";
 
 import {
@@ -42,7 +42,7 @@ export default async function productList(selector, category) {
   // get the element we will insert the list into from the selector
   // get the list of products 
   // render out the product list to the element
-  const products = await getData(category);
+  const products = await getProductsByCategory(category);
   const ids = ["880RR", "985RF", "985PR", "344YJ"];
   // const filteredProducts = products.filter((product) =>  ids.includes(product.Id));
 
