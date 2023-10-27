@@ -1,4 +1,3 @@
-
 const baseURL = import.meta.env.VITE_SERVER_URL;
 
 function convertToJson(res) {
@@ -9,25 +8,12 @@ function convertToJson(res) {
   }
 }
 
-export async function getData(category) {
+export async function getProductsByCategory(category) {
   const response = await fetch(baseURL + `products/search/${category}`);
   console.log(response);
   const data = await convertToJson(response);
   return data.Result;
 }
-
-// export function getData(category = "tents") {
-//   //Joshua's way of ensuring we have a returned promise 
-// //   const response = fetch(`../json/${category}.json`).then(convertToJson).then((data) => {
-// // console.log("data", data)
-// //   return data
-// // }
-// //   );
-// //   return response;
-//   return fetch(`../json/${category}.json`)
-//     .then(convertToJson)
-//     .then((data) => data);
-// }
 
 // BB: The findProductById function uses the API to get the product data based on the 
 // id passed to the function and converts the API response to JSON. It then checks if 
@@ -41,17 +27,18 @@ export async function findProductById(id) {
   if (product != null && product.Result != null && product.Result.Id === id){
     return product.Result;
   } else{
-    window.location.href = '../product_pages/error.html';
+    window.location.href = "../product_pages/error.html";
   }
-
-
 }
-  // }); products.find((item) => {
-  // if (item.Id === id){
-  //   return item;
-  // } else {
-  //   console.log("productData line 28");
-  //   // window.location.href = 'https://www.google.com/';
-  // }  
-  // });
-// }
+
+// team6 checkoutProcess.mjs
+export async function checkout(payload) {
+  const options = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(payload),
+  };
+  return await fetch(baseURL + "checkout/", options).then(convertToJson);
+}

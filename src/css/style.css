@@ -299,7 +299,7 @@ Best site ever to assist with animation: https://www.doozytools.com/dev-tools/cs
   grid-column: 3;
 }
 
-.cart-card button{
+.cart-card button {
   margin: unset;
   color: white;
   background: var(--secondary-color);
@@ -311,18 +311,18 @@ Best site ever to assist with animation: https://www.doozytools.com/dev-tools/cs
   width: 25%;
 }
 
-#cart_sub{
+#cart_sub {
   margin-left: 2em;
 }
 
-.remove-item{
+.remove-item {
   cursor: pointer;
   font-weight: bold;
   grid-column: 3;
   color: white;
   background: var(--secondary-color);
-  padding: .2em 1em;
-  margin: .5em;
+  padding: 0.2em 1em;
+  margin: 0.5em;
   font-size: small;
 }
 
@@ -343,7 +343,7 @@ Style for Call To Action Banner on homepage. BY-W6, Trello Card
   I still need to adjust it for mobile devices - 10/18/23, by
 */
 .actionBanner {
-  background-image: url('../images/ACTIONBANNERpaul-volkmer-qVotvbsuM_c-unsplash.jpg');
+  background-image: url("../images/ACTIONBANNERpaul-volkmer-qVotvbsuM_c-unsplash.jpg");
   background-size: repeat;
   color: var(--primary-color);
   text-align: center;
@@ -381,7 +381,6 @@ Style for Call To Action Banner on homepage. BY-W6, Trello Card
 }
 /* End Call To Action styles */
 
-
 @media screen and (min-width: 500px) {
   body {
     max-width: 1080px;
@@ -409,7 +408,6 @@ s {
 
 .discount {
   color: var(--primary-color);
-
 }
 
 .discounted {
