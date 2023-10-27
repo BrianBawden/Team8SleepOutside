@@ -37,9 +37,12 @@ const checkoutProcess = {
     this.key = key;
     this.outputSelector = outputSelector;
     this.list = getLocalStorage(key);
+    console.log("cart list", this.list);
     this.calculateItemSummary();
   },
   calculateItemSummary: function () {
+    
+
     const summaryElement = document.querySelector(
       this.outputSelector + " #cartTotal"
     );
