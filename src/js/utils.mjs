@@ -54,13 +54,7 @@ export function getParam(param) {
   return urlParams.get(param);
 }
 
-export function renderListWithTemplate(
-  templateFn,
-  parentElement,
-  list,
-  position = "afterbegin",
-  clear = true
-) {
+function individualCartItem(list) {
   let listId = []; // listId holds the Id value for each item in the cart without duplicating any Id values.
   let newList = []
   list.forEach(element => {
@@ -69,6 +63,18 @@ export function renderListWithTemplate(
       newList.push(element);
     }
   });
+  return newList;
+}
+
+
+export function renderListWithTemplate(
+  templateFn,
+  parentElement,
+  list,
+  position = "afterbegin",
+  clear = true
+) {
+  const newList = individualCartItem(list); // newList is an array of the so-cart localStorage without duplicates.
   if (clear && parentElement !== null) {
     parentElement.innerHTML = "";
   }
