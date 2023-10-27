@@ -25,6 +25,7 @@ export function getLocalStorageKeys() {
 export function getLocalStorage(key) {
   const item = localStorage.getItem(key);
   try {
+    console.log("item", item);
     return JSON.parse(item);
   } catch (error) {
     console.error(
@@ -60,7 +61,7 @@ export function renderListWithTemplate(
   position = "afterbegin",
   clear = true
 ) {
-  if (clear) {
+  if (clear && parentElement !== null) {
     parentElement.innerHTML = "";
   }
   const htmlStrings = list.map(templateFn);
@@ -107,57 +108,57 @@ export async function loadHeaderFooter() {
 
 
 // Update cart item badge count in header
-export function updateCartItemCount() {
-  let cartTotal = 0;
-  const cartItems = Object.keys(localStorage);
-  const cartItemCount = cartItems.forEach(function(item) {
-    let product = getLocalStorage(item);
-    if (product.hasOwnProperty("qty")) {
-      cartTotal += product.qty;
-    } 
-  })
-  const cartItemCountElement = document.getElementById("cartItemCount");
+// export function updateCartItemCount() {
+//   let cartTotal = 0;
+//   const cartItems = Object.keys(localStorage);
+//   const cartItemCount = cartItems.forEach(function(item) {
+//     let product = getLocalStorage(item);
+//     if (product.hasOwnProperty("qty")) {
+//       cartTotal += product.qty;
+//     } 
+//   })
+//   const cartItemCountElement = document.getElementById("cartItemCount");
 
-  if (cartItemCountElement !== null) {
-    if (cartTotal === 0) {
-      // If there aren't items in the cart, hide the cartItemCount element
-      cartItemCountElement.style.display = "none";
-    } else {
-      // If there are items in the cart, show the cartItemCount element
-      cartItemCountElement.style.display = "block";
-      cartItemCountElement.textContent = cartTotal;
-    }
-  }
-}
+//   if (cartItemCountElement !== null) {
+//     if (cartTotal === 0) {
+//       // If there aren't items in the cart, hide the cartItemCount element
+//       cartItemCountElement.style.display = "none";
+//     } else {
+//       // If there are items in the cart, show the cartItemCount element
+//       cartItemCountElement.style.display = "block";
+//       cartItemCountElement.textContent = cartTotal;
+//     }
+//   }
+// }
 
 // Fetch alerts for home page
 export async function fetchAlerts() {
   try {
-    const response = await fetch('/json/alerts.json');
+    const response = await fetch("/json/alerts.json");
     if (!response.ok) {
-      throw new Error('Network response was not ok ' + response.statusText);
+      throw new Error("Network response was not ok " + response.statusText);
     }
     const data = await response.json();
     createAlerts(data);
   } catch (error) {
-    console.error('There has been a problem with your fetch operation: ', error);
+    console.error("There has been a problem with your fetch operation: ", error);
   }
 }
 
 function createAlerts(alerts) {
   if (alerts && alerts.length > 0) {
-    const alertList = document.createElement('section');
-    alertList.className = 'alert-list';
+    const alertList = document.createElement("section");
+    alertList.className = "alert-list";
 
     alerts.forEach(alert => {
-      const p = document.createElement('p');
+      const p = document.createElement("p");
       p.textContent = alert.message;
       p.style.backgroundColor = alert.background;
       p.style.color = alert.color;
       alertList.appendChild(p);
     });
 
-    const mainElement = document.querySelector('main');
+    const mainElement = document.querySelector("main");
     mainElement.prepend(alertList);
   }
 }
