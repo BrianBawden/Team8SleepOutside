@@ -7,7 +7,7 @@ import {
 
 import {
   findProductById
-} from "./productData.mjs";
+} from "./externalServices.mjs";
 
 
 export default async function productDetails(productId, selector) {

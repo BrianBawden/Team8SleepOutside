@@ -1,6 +1,6 @@
 import {
   getData
-} from "./productData.mjs";
+} from "./externalServices.mjs";
 
 import {
   renderListWithTemplate

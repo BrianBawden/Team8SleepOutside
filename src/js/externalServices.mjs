@@ -1,4 +1,3 @@
-
 const baseURL = import.meta.env.VITE_SERVER_URL;
 
 function convertToJson(res) {
@@ -16,19 +15,6 @@ export async function getData(category) {
   return data.Result;
 }
 
-// export function getData(category = "tents") {
-//   //Joshua's way of ensuring we have a returned promise 
-// //   const response = fetch(`../json/${category}.json`).then(convertToJson).then((data) => {
-// // console.log("data", data)
-// //   return data
-// // }
-// //   );
-// //   return response;
-//   return fetch(`../json/${category}.json`)
-//     .then(convertToJson)
-//     .then((data) => data);
-// }
-
 // BB: The findProductById function uses the API to get the product data based on the 
 // id passed to the function and converts the API response to JSON. It then checks if 
 // product and its results are not null and the result.id matches id. If not the url is
@@ -43,15 +29,16 @@ export async function findProductById(id) {
   } else{
     window.location.href = "../product_pages/error.html";
   }
-
-
 }
-  // }); products.find((item) => {
-  // if (item.Id === id){
-  //   return item;
-  // } else {
-  //   console.log("productData line 28");
-  //   // window.location.href = 'https://www.google.com/';
-  // }  
-  // });
-// }
+
+// team6 checkoutProcess.mjs
+export async function checkout(payload) {
+  const options = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(payload),
+  };
+  return await fetch(baseURL + "checkout/", options).then(convertToJson);
+}
