@@ -48,6 +48,9 @@ function cartItemTemplate(item) {
   </a>
   <p class="cart-card__color">${item.Colors[0].ColorName}</p>
   <p class="cart-card__quantity">qty: ${qty}</p>
+  <button class="cart-card__quantity_add">+</button>
+  <button class="cart-card__quantity_sub" id=
+  "cart_sub" onclick="subProduct(${item.Id}">-</button>
   <p class="cart-card__price">$${item.FinalPrice}</p>
 </li>`;
 
