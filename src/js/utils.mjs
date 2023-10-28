@@ -1,3 +1,7 @@
+import {
+  cartCount
+} from "./shoppingCart.mjs";
+
 // wrapper for querySelector...returns matching element
 export function qs(selector, parent = document) {
   return parent.querySelector(selector);
@@ -69,6 +73,7 @@ export function renderListWithTemplate(
   parentElement.insertAdjacentHTML(position, htmlStrings.join(""));
 }
 
+// header and footer calls
 export async function renderWithTemplate(
   templateFn,
   parentElement,
@@ -85,6 +90,7 @@ export async function renderWithTemplate(
   if (callback) {
     callback(data);
   }
+  cartCount();
 }
 
 export function loadTemplate(path) {
@@ -106,30 +112,6 @@ export async function loadHeaderFooter() {
   renderWithTemplate(footerTemplateFn, footerElement);
 }
 
-
-// Update cart item badge count in header
-// export function updateCartItemCount() {
-//   let cartTotal = 0;
-//   const cartItems = Object.keys(localStorage);
-//   const cartItemCount = cartItems.forEach(function(item) {
-//     let product = getLocalStorage(item);
-//     if (product.hasOwnProperty("qty")) {
-//       cartTotal += product.qty;
-//     } 
-//   })
-//   const cartItemCountElement = document.getElementById("cartItemCount");
-
-//   if (cartItemCountElement !== null) {
-//     if (cartTotal === 0) {
-//       // If there aren't items in the cart, hide the cartItemCount element
-//       cartItemCountElement.style.display = "none";
-//     } else {
-//       // If there are items in the cart, show the cartItemCount element
-//       cartItemCountElement.style.display = "block";
-//       cartItemCountElement.textContent = cartTotal;
-//     }
-//   }
-// }
 
 // Fetch alerts for home page
 export async function fetchAlerts() {

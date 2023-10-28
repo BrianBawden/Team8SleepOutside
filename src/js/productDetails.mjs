@@ -1,7 +1,6 @@
 import {
   qs,
   setLocalStorage,
-  getParam,
   getLocalStorage
 } from "./utils.mjs";
 
@@ -9,13 +8,21 @@ import {
   findProductById
 } from "./externalServices.mjs";
 
+import {
+  cartCount,
+  cartIconAnimation
+} from "./shoppingCart.mjs";
+
+//initialize cart array
 let product = {};
+
 
 export default async function productDetails(productId) {
   product = await findProductById(productId);
   renderProductDetails(product);
   document.getElementById("addToCart").addEventListener("click", addToCart);
 }
+
 
 // render product details
 function renderProductDetails() {
@@ -55,15 +62,8 @@ function renderProductDetails() {
   btn.dataset.id = product.Id;
 }
 
-// add to cart
-//function addToCart(id, product) {
-  // setLocalStorage(id, product);
-  // const localProduct = JSON.parse(localStorage.getItem(id));
-  // // add qty to localStorage.id 
-  // localProduct.qty = 1;
-  // setLocalStorage(id, localProduct);
-  
-  function addToCart() {
+
+function addToCart() {
   let cartContents = getLocalStorage("so-cart");
   //check to see if there was anything there
   if (!cartContents) {
@@ -72,11 +72,15 @@ function renderProductDetails() {
   // then add the current product to the list
   cartContents.push(product);
   setLocalStorage("so-cart", cartContents);
+
+  // BY-After adding an item to cart, update cart count in header
+  cartCount();
+
+  // BY-Trigger the animation when an item is added to the cart
+  const cartIcon = document.querySelector(".cart");
+  cartIconAnimation(cartIcon);
 }
 
-
-// Call function so it runs on page load and updates cart count
-// updateCartItemCount();
 
 // add to cart button event handler
 // async function addToCartHandler(e) {
@@ -84,23 +88,4 @@ function renderProductDetails() {
 //   const product = await findProductById(productId);
 //   addToCart(productId, product);
 //   updateCartItemCount();
-
 // }
-
-// Animation for cart icon,
-// const cartIcon = document.querySelector(".cart");
-// if (cartIcon) {
-//   cartIconAnimation(cartIcon);
-// }
-// Animation for cart icon,
-//const cartIcon = document.querySelector(".cart");
-  // Add the animation class and remove it after a 2 second/2000 millisecond delay
-  function cartIconAnimation(cartIcon) {
-    cartIcon.classList.add("iconAnimation");
-  setTimeout(() => {
-    cartIcon.classList.remove("iconAnimation");
-  }, 2000);
-}
-
-
-

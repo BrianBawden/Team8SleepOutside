@@ -85,7 +85,7 @@ header {
   margin-top: -1.3em;
 }
 
-.logo--square > div {
+.logo--square>div {
   margin-top: -1.7em;
 }
 
@@ -95,14 +95,30 @@ header {
 }
 
 button {
-  padding: 0.5em 2em;
   background-color: var(--secondary-color);
   color: white;
+  padding: 5px 10px;
   margin: auto;
   display: block;
-  border: 0;
-  font-size: var(--large-font);
+  font-size: var(--font-headline);
+  width: fit-content;
+  text-align: center;
+  border: 2px solid var(--tertiary-color);
+  border-radius: 8px;
   cursor: pointer;
+  text-decoration: none;
+}
+
+button:hover {
+  background-color: var(--dark-grey);
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 -7px 10px var(--tertiary-color);
+}
+
+.checkout a {
+  text-decoration: none;
+  color: white;
 }
 
 .divider {
@@ -339,7 +355,7 @@ Best site ever to assist with animation: https://www.doozytools.com/dev-tools/cs
 }
 
 /*
-Style for Call To Action Banner on homepage. BY-W6, Trello Card
+BY-Trello Card: Style for Call To Action Banner on homepage. 
   I still need to adjust it for mobile devices - 10/18/23, by
 */
 .actionBanner {
@@ -361,9 +377,9 @@ Style for Call To Action Banner on homepage. BY-W6, Trello Card
   font-size: var(--font-body);
 }
 
-#action-button {
+/* #action-button {
   background-color: var(--secondary-color);
-  color: var(--light-grey);
+  color: white;
   padding: 5px 10px;
   margin: auto;
   font-size: var(--font-headline);
@@ -375,11 +391,14 @@ Style for Call To Action Banner on homepage. BY-W6, Trello Card
 
 #action-button:hover {
   background-color: var(--dark-grey);
-  color: var(--tertiary-color);
+  color: white;
   cursor: pointer;
   box-shadow: 0 -7px 10px var(--tertiary-color);
-}
+} */
+
 /* End Call To Action styles */
+
+
 
 @media screen and (min-width: 500px) {
   body {

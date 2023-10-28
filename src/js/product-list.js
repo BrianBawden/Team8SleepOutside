@@ -1,5 +1,5 @@
 import productList from "./productList.mjs";
-import { getParam, qs } from "./utils.mjs";
+import { getParam } from "./utils.mjs";
 
 const category = getParam("category");
 
