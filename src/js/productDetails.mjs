@@ -62,15 +62,43 @@ function renderProductDetails() {
   // // add qty to localStorage.id 
   // localProduct.qty = 1;
   // setLocalStorage(id, localProduct);
-  
-  function addToCart() {
+
+function getCartIds(){
   let cartContents = getLocalStorage("so-cart");
-  //check to see if there was anything there
+  let listId = []; // listId holds the Id value for each item in the cart without duplicating any Id values.
+  let newList = []
+
   if (!cartContents) {
     cartContents = [];
   }
+
+  cartContents.forEach(element => {
+    if (!listId.includes(element.Id)){
+      listId.push(element.Id);
+      newList.push(element);
+    }
+  });
+  return listId;
+}
+  
+function addToCart() {
+  let cartContents = getLocalStorage("so-cart");
+  const cartIds = getCartIds();
+  if (!cartContents) {
+    cartContents = [];
+  }
+  if (cartIds.includes(product.Id)) {
+    cartContents.forEach(item => {
+      if (item.Id == product.Id){
+        item.qty += 1;
+      }
+    })
+  } else {
+
+    product.qty = 1;
+    cartContents.push(product);
+  }
   // then add the current product to the list
-  cartContents.push(product);
   setLocalStorage("so-cart", cartContents);
 }
 
