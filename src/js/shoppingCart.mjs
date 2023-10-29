@@ -33,8 +33,6 @@ function displayCartTotal(total) {
 }
 
 function cartItemTemplate(item) {
-  const soCart = getLocalStorage("so-cart");
-  let qty = soCart.filter(i => i.Id === item.Id).length;
 
   const newItem = `<li class="cart-card divider">
   <a href="#" class="cart-card__image">
@@ -47,10 +45,10 @@ function cartItemTemplate(item) {
     <h2 class="card__name">${item.Name}</h2>
   </a>
   <p class="cart-card__color">${item.Colors[0].ColorName}</p>
-  <p class="cart-card__quantity">qty: ${qty}</p>
+  <p class="cart-card__quantity">qty: ${item.qty}</p>
   <button class="cart-card__quantity_add">+</button>
   <button class="cart-card__quantity_sub" id=
-  "cart_sub" onclick="subProduct(${item.Id}">-</button>
+  "cart_sub">-</button>
   <p class="cart-card__price">$${item.FinalPrice}</p>
 </li>`;
 
