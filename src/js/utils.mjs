@@ -79,7 +79,6 @@ export function renderListWithTemplate(
     parentElement.innerHTML = "";
   }
   const htmlStrings = newList.map(templateFn);
-// console.log(htmlStrings);
   parentElement.insertAdjacentHTML(position, htmlStrings.join(""));
 }
 

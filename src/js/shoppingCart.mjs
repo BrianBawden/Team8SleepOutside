@@ -8,28 +8,24 @@ import {
 
 export default function ShoppingCart() {
   const cartItems = getLocalStorage("so-cart");
-  //const cartItemskeys = getLocalStorageKeys();
-  //const cartItems = cartItemskeys.map((key) => getLocalStorage(key));
   const outputEl = document.querySelector(".product-list");
   renderListWithTemplate(cartItemTemplate, outputEl, cartItems);
-  // attachRemoveListeners();
-  // addQtyBtnListeners();
-  // showTotal();
-  // const htmlItems = cartItems.map((item) => cartItemTemplate(item));
-  // document.querySelector(".product-list").innerHTML = htmlItems.join("");
   const total = calculateListTotal(cartItems);
   displayCartTotal(total);
+  addEventListener();
 }
 
 
 function displayCartTotal(total) {
-  if (total > 0) {
+  const listFooter = document.querySelector(".list-footer");
+  if (total > 0 && listFooter.classList.contains("hide")) {
     // show our checkout button and total if there are items in the cart.
-    document.querySelector(".list-footer").classList.remove("hide");
+    listFooter.classList.remove("hide");
     document.querySelector(".list-total").innerText += ` $${total}`;
-  } else {
-    document.querySelector(".list-footer").classList.add("hide");
-  }
+  } 
+  // else {
+  //   listFooter.classList.add("hide");
+  // }
 }
 
 function cartItemTemplate(item) {
@@ -46,9 +42,8 @@ function cartItemTemplate(item) {
   </a>
   <p class="cart-card__color">${item.Colors[0].ColorName}</p>
   <p class="cart-card__quantity">qty: ${item.qty}</p>
-  <button class="cart-card__quantity_add">+</button>
-  <button class="cart-card__quantity_sub" id=
-  "cart_sub">-</button>
+  <button class="cart-card__quantity_add" value="${item.Id}">+</button>
+  <button class="cart-card__quantity_sub" id="cart_sub" value="${item.Id}">-</button>
   <p class="cart-card__price">$${item.FinalPrice}</p>
 </li>`;
 
@@ -56,9 +51,53 @@ function cartItemTemplate(item) {
 }
 
 function calculateListTotal(list) {
-  const amounts = list.map((item) => item.FinalPrice);
+  const amounts = list.map((item) => item.FinalPrice * item.qty);
   const total = amounts.reduce((sum, item) => sum + item, 0);
+  ShoppingCart
   return total;
+}
+
+function addEventListener(){
+  const addBtn = document.querySelectorAll(".cart-card__quantity_add");
+  const subBtn = document.querySelectorAll(".cart-card__quantity_sub");
+
+  addBtn.forEach(button => {
+    button.addEventListener("click", addQty)
+    button.myProduct = button.value;
+  })
+
+  subBtn.forEach(button => {
+    button.addEventListener("click", subQty)
+    button.myProduct = button.value;
+  })
+}
+
+function addQty(product){
+  const outputEl = document.querySelector(".product-list");
+
+  let cartContents = getLocalStorage("so-cart");
+  let productId = product.currentTarget.myProduct;
+
+  cartContents.forEach(item => {
+    if (item.Id == productId){
+      item.qty += 1;
+    }
+  })
+  setLocalStorage("so-cart", cartContents);
+  ShoppingCart()
+}
+
+function subQty(product){
+  let cartContents = getLocalStorage("so-cart");
+  let productId = product.currentTarget.myProduct;
+  
+  cartContents.forEach(item => {
+    if (item.Id == productId){
+      if(item.qty > 1){item.qty -= 1;}
+    }
+  })
+  setLocalStorage("so-cart", cartContents);
+  ShoppingCart()
 }
 
 
