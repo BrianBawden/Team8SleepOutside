@@ -1,8 +1,6 @@
 import {
   getLocalStorage,
-  renderListWithTemplate,
-  getLocalStorageKeys,
-  setLocalStorage,
+  renderListWithTemplate
 } from "./utils.mjs";
 
 export default function ShoppingCart() {
@@ -53,8 +51,43 @@ function cartItemTemplate(item) {
 function calculateListTotal(list) {
   const amounts = list.map((item) => item.FinalPrice);
   const total = amounts.reduce((sum, item) => sum + item, 0);
-  return total;
+  return total.toFixed(2);
 }
+
+
+/* BY - Trello card: Add a superscript number 
+of items in the cart to the backpack icon in 
+the header. 
+*** THIS FUNCTION MUST BE CALLED 
+    on page load, when an item is added, 
+    and when an item is removed from the cart *** */
+export function cartCount() {
+  const cartItems = getLocalStorage("so-cart");
+  const cartItemCountElement = document.getElementById("cartItemCount");
+  if (cartItemCountElement) {
+    if (cartItems && cartItems.length > 0) {
+      cartItemCountElement.style.display = "block";
+      cartItemCountElement.textContent = cartItems.length;
+    } else {
+      cartItemCountElement.style.display = "none";
+    }
+  }
+}
+
+
+/* BY-Trello card: Animate cart (backpack) icon when item added to cart
+   Add the animation class and remove it after a 2 second/2000 millisecond delay 
+   Export and call with any functions that modify cart count + or - */
+export function cartIconAnimation() {
+  const cartIcon = document.querySelector(".cart");
+  if (cartIcon) {
+    cartIcon.classList.add("iconAnimation");
+    setTimeout(() => {
+      cartIcon.classList.remove("iconAnimation");
+    }, 2000);
+  }
+}
+
 
 
 // function cartItemTemplate(item) {
@@ -193,7 +226,7 @@ function calculateListTotal(list) {
 //   let productId = product.currentTarget.myProduct;
 //   let qtyElement = document.getElementById(productId);
 //   let productValue = JSON.parse(localStorage.getItem(productId));
-  
+
 //   productValue.qty += 1;
 //   setLocalStorage(productId, productValue);
 //   qtyElement.textContent = productValue.qty;
