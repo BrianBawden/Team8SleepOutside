@@ -6,6 +6,7 @@ import {
   renderListWithTemplate
 } from "./utils.mjs";
 
+
 // productList.mjs
 function productCardTemplate(product) {
   const finalPrice = product.FinalPrice;
@@ -49,5 +50,5 @@ export default async function productList(selector, category) {
   const parent = document.querySelector(selector);
   //renderList(products, parent);
   renderListWithTemplate(productCardTemplate, parent, products);
-  document.querySelector(".title").innerHTML = category;
+  //document.querySelector(".title").innerHTML = category;
 };
