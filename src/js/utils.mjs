@@ -1,6 +1,4 @@
-import {
-  cartCount
-} from "./shoppingCart.mjs";
+import { cartCount } from "./shoppingCart.mjs";
 
 // wrapper for querySelector...returns matching element
 export function qs(selector, parent = document) {
@@ -60,16 +58,15 @@ export function getParam(param) {
 
 export function individualCartItem(list) {
   let listId = []; // listId holds the Id value for each item in the cart without duplicating any Id values.
-  let newList = []
-  list.forEach(element => {
-    if (!listId.includes(element.Id)){
+  let newList = [];
+  list.forEach((element) => {
+    if (!listId.includes(element.Id)) {
       listId.push(element.Id);
       newList.push(element);
     }
   });
   return newList;
 }
-
 
 export function renderListWithTemplate(
   templateFn,
@@ -125,7 +122,6 @@ export async function loadHeaderFooter() {
   renderWithTemplate(footerTemplateFn, footerElement);
 }
 
-
 // Fetch alerts for home page
 export async function fetchAlerts() {
   try {
@@ -136,7 +132,10 @@ export async function fetchAlerts() {
     const data = await response.json();
     createAlerts(data);
   } catch (error) {
-    console.error("There has been a problem with your fetch operation: ", error);
+    console.error(
+      "There has been a problem with your fetch operation: ",
+      error
+    );
   }
 }
 
@@ -145,7 +144,7 @@ function createAlerts(alerts) {
     const alertList = document.createElement("section");
     alertList.className = "alert-list";
 
-    alerts.forEach(alert => {
+    alerts.forEach((alert) => {
       const p = document.createElement("p");
       p.textContent = alert.message;
       p.style.backgroundColor = alert.background;
@@ -156,4 +155,31 @@ function createAlerts(alerts) {
     const mainElement = document.querySelector("main");
     mainElement.prepend(alertList);
   }
+}
+
+export function alertMessage(message, scroll = true, duration = 3000) {
+  const alert = document.createElement("div");
+  alert.classList.add("alert");
+  alert.innerHTML = `<p>${message}</p><span>X</span>`;
+
+  alert.addEventListener("click", function (e) {
+    if (e.target.tagName == "SPAN") {
+      main.removeChild(this);
+    }
+  });
+  const main = document.querySelector("main");
+  main.prepend(alert);
+  // make sure they see the alert by scrolling to the top of the window
+  //we may not always want to do this...so default to scroll=true, but allow it to be passed in and overridden.
+  if (scroll) window.scrollTo(0, 0);
+
+  // left this here to show how you could remove the alert automatically after a certain amount of time.
+  // setTimeout(function () {
+  //   main.removeChild(alert);
+  // }, duration);
+}
+
+export function removeAllAlerts() {
+  const alerts = document.querySelectorAll(".alert");
+  alerts.forEach((alert) => document.querySelector("main").removeChild(alert));
 }
