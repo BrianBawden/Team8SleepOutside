@@ -29,7 +29,7 @@ export function getLocalStorageKeys() {
 export function getLocalStorage(key) {
   const item = localStorage.getItem(key);
   try {
-    console.log("item", item);
+    // console.log("item", item);
     return JSON.parse(item);
   } catch (error) {
     console.error(
@@ -58,6 +58,19 @@ export function getParam(param) {
   return urlParams.get(param);
 }
 
+export function individualCartItem(list) {
+  let listId = []; // listId holds the Id value for each item in the cart without duplicating any Id values.
+  let newList = []
+  list.forEach(element => {
+    if (!listId.includes(element.Id)){
+      listId.push(element.Id);
+      newList.push(element);
+    }
+  });
+  return newList;
+}
+
+
 export function renderListWithTemplate(
   templateFn,
   parentElement,
@@ -65,11 +78,11 @@ export function renderListWithTemplate(
   position = "afterbegin",
   clear = true
 ) {
+  const newList = individualCartItem(list); // newList is an array of the so-cart localStorage without duplicates.
   if (clear && parentElement !== null) {
     parentElement.innerHTML = "";
   }
-  const htmlStrings = list.map(templateFn);
-
+  const htmlStrings = newList.map(templateFn);
   parentElement.insertAdjacentHTML(position, htmlStrings.join(""));
 }
 

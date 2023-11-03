@@ -62,16 +62,49 @@ function renderProductDetails() {
   btn.dataset.id = product.Id;
 }
 
+function getCartIds(){
+
+  let cartContents = getLocalStorage("so-cart");
+  let listId = []; // listId holds the Id value for each item in the cart without duplicating any Id values.
+  let newList = []
+
+  if (!cartContents) {
+    cartContents = [];
+  }
+
+  cartContents.forEach(element => {
+    if (!listId.includes(element.Id)){
+      listId.push(element.Id);
+      newList.push(element);
+    }
+  });
+  return listId;
+}
 
 function addToCart() {
   let cartContents = getLocalStorage("so-cart");
+  const cartIds = getCartIds();
   //check to see if there was anything there
   if (!cartContents) {
     cartContents = [];
   }
+
+  if (cartIds.includes(product.Id)) {
+
+    cartContents.forEach(item => {
+      if (item.Id == product.Id){
+        item.qty += 1;
+
+        setLocalStorage("so-cart", cartContents);
+      }
+    })
+  } else {
   // then add the current product to the list
   cartContents.push(product);
+  product.qty = 1;
   setLocalStorage("so-cart", cartContents);
+
+  }
 
   // BY-After adding an item to cart, update cart count in header
   cartCount();
