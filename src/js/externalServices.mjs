@@ -1,10 +1,13 @@
 const baseURL = import.meta.env.VITE_SERVER_URL;
 
-function convertToJson(res) {
+async function convertToJson(res) {
+  const jsonResponse = await res.json();
+  console.log(jsonResponse);
   if (res.ok) {
-    return res.json();
+    return jsonResponse;
   } else {
-    throw new Error("Bad Response");
+    console.log(jsonResponse);
+    throw { name: "servicesError", message: jsonResponse };
   }
 }
 
@@ -15,18 +18,17 @@ export async function getProductsByCategory(category) {
   return data.Result;
 }
 
-// BB: The findProductById function uses the API to get the product data based on the 
-// id passed to the function and converts the API response to JSON. It then checks if 
+// BB: The findProductById function uses the API to get the product data based on the
+// id passed to the function and converts the API response to JSON. It then checks if
 // product and its results are not null and the result.id matches id. If not the url is
 // redirected to the error page.
 export async function findProductById(id) {
-  
   const response = await fetch(baseURL + `product/${id}`);
   const product = await convertToJson(response);
 
-  if (product != null && product.Result != null && product.Result.Id === id){
+  if (product != null && product.Result != null && product.Result.Id === id) {
     return product.Result;
-  } else{
+  } else {
     window.location.href = "../product_pages/error.html";
   }
 }

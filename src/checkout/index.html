@@ -13,35 +13,66 @@
     <header class="divider" id="main-header"></header>
     <main class="divider checkout">
       <h2>Review & Place your Order</h2>
+      <p id="error"></p>
       <section class="checkout-form">
         <form name="checkout">
           <fieldset>
             <legend>Shipping</legend>
             <div class="checkout__name">
               <label for="fname">First Name</label>
-              <input name="fname" required />
+              <input name="fname" required value="John" />
               <label for="lname">Last Name</label>
-              <input name="lname" required />
+              <input name="lname" required value="Doe" />
             </div>
             <div class="checkout__address">
               <label for="street">Street</label>
-              <input name="street" required />
+              <input name="street" value="123" required />
               <label for="city">City</label>
-              <input name="city" required />
+              <input name="city" required value="City" />
               <label for="state">State</label>
-              <input name="state" required />
+              <input name="state" value="state" required />
               <label for="zip">Zip</label>
-              <input name="zip" id="zip" required />
+              <input
+                name="zip"
+                id="zip"
+                type="text"
+                pattern="^\d{5}$"
+                title="Please enter a valid 5-digit zip code"
+                required
+              />
             </div>
           </fieldset>
           <fieldset>
             <legend>Payment</legend>
             <label for="cardNumber">Card number</label>
-            <input name="cardNumber" required value="1234123412341234" />
+            <input
+              name="cardNumber"
+              id="cardNumber"
+              type="text"
+              pattern="^\d{16}$"
+              title="Please enter a valid 16-digit credit card number"
+              required
+              value="1234123412341234"
+            />
+
             <label for="expiration">Expiration</label>
-            <input name="expiration" required />
+            <input
+              name="expiration"
+              type="text"
+              pattern="^(0[1-9]|1[0-2])\/([0-9]{2})$"
+              title="Please enter a valid date (MM/YY)"
+              required
+              value="06/24"
+            />
             <label for="code">Security Code</label>
-            <input name="code" required value="123" />
+            <input
+              name="code"
+              required
+              value="123"
+              type="number"
+              maxlength="3"
+              minlength="3"
+            />
           </fieldset>
           <fieldset class="checkout-summary">
             <legend>Order Summary</legend>
@@ -72,8 +103,6 @@
       </section>
     </main>
     <footer id="main-footer"></footer>
-    <script src="../js/main.js" type="module"></script>
-    <script src="../js/cart.js" type="module"></script>
     <script src="../js/checkout.js" type="module"></script>
   </body>
 </html>
