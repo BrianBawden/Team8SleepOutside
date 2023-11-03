@@ -63,6 +63,7 @@ function renderProductDetails() {
 }
 
 function getCartIds(){
+
   let cartContents = getLocalStorage("so-cart");
   let listId = []; // listId holds the Id value for each item in the cart without duplicating any Id values.
   let newList = []
@@ -102,7 +103,9 @@ function addToCart() {
   cartContents.push(product);
   product.qty = 1;
   setLocalStorage("so-cart", cartContents);
+
   }
+
   // BY-After adding an item to cart, update cart count in header
   cartCount();
 

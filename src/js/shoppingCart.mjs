@@ -52,6 +52,7 @@ function calculateListTotal(list) {
   const amounts = list.map((item) => item.FinalPrice * item.qty);
   const total = amounts.reduce((sum, item) => sum + item, 0);
   return total.toFixed(2);
+
 }
 
 function addEventListener(){
@@ -121,6 +122,7 @@ export function cartCount() {
     }
   }
 }
+
 
 
 /* BY-Trello card: Animate cart (backpack) icon when item added to cart
