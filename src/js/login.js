@@ -1,5 +1,7 @@
+import { check } from "prettier";
 import { login } from "./auth.mjs";
 import { getParam, loadHeaderFooter } from "./utils.mjs";
+import { checkLogin } from "./auth.mjs";
 
 loadHeaderFooter();
 console.log(window.location.href);
