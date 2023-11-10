@@ -1,3 +1,4 @@
+import { check } from "prettier";
 import { loadHeaderFooter } from "./utils.mjs";
 import { fetchAlerts } from "./utils.mjs";
 
